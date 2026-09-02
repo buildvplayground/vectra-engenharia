@@ -47,6 +47,45 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Header: colapso por MEDIÇÃO, não só por breakpoint.
+
+     Os breakpoints em `em` já cobrem viewport estreita e aumento da fonte
+     padrão do navegador (WCAG 1.4.4). Esta trava cobre o resto: tradução mais
+     longa, fonte com métrica diferente, um item de menu a mais. Mede a largura
+     que a linha PEDE contra a que ela TEM e vai apertando em dois estágios.
+     --------------------------------------------------------------------------- */
+  var hdr = document.querySelector('.hdr');
+  var hdrIn = document.querySelector('.hdr__in');
+  if (hdr && hdrIn) {
+    var ajustandoHdr = false;
+    function ajustaHeader() {
+      if (ajustandoHdr) return;
+      ajustandoHdr = true;
+      hdr.removeAttribute('data-fit');            // mede sempre do estado limpo
+      requestAnimationFrame(function () {
+        var folga = 8;
+        if (hdrIn.scrollWidth > hdrIn.clientWidth + folga) {
+          hdr.setAttribute('data-fit', 'tight');  // 1º: sai o CTA do header
+          requestAnimationFrame(function () {
+            if (hdrIn.scrollWidth > hdrIn.clientWidth + folga) {
+              hdr.setAttribute('data-fit', 'drawer');  // 2º: vira gaveta
+            }
+            ajustandoHdr = false;
+          });
+        } else {
+          ajustandoHdr = false;
+        }
+      });
+    }
+    ajustaHeader();
+    addEventListener('resize', ajustaHeader);
+    addEventListener('load', ajustaHeader);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(ajustaHeader);    // métrica real, não fallback
+    }
+  }
+
+  /* ---------------------------------------------------------------------------
      Lightbox — galeria por obra.
      Cada card leva data-gallery="p1|p2|..." e o JS cicla dentro dessa lista.
      --------------------------------------------------------------------------- */
@@ -133,39 +172,29 @@
   }
 
   /* ---------------------------------------------------------------------------
-     Vídeos institucionais — play sob demanda.
+     Faixa de marcas — controle de pausa.
 
-     Os arquivos foram codificados SEM trilha de áudio (ffmpeg -an), a pedido do
-     cliente: não é só o atributo `muted`. Com preload="none" nada é baixado até
-     o clique, e como nada toca sozinho não há o problema de auto-play do
-     WCAG 2.2.2. Os controles nativos aparecem depois do primeiro play, para o
-     usuário poder pausar e navegar.
+     WCAG 2.2.2: conteúdo que se move sozinho por mais de 5 segundos precisa de
+     um jeito de parar. O `:hover` do CSS não resolve para quem navega por
+     teclado, então aqui vai um botão de verdade, com aria-pressed.
      --------------------------------------------------------------------------- */
-  document.querySelectorAll('.vid__i').forEach(function (fig) {
-    var v = fig.querySelector('video');
-    var b = fig.querySelector('[data-play]');
-    if (!v || !b) return;
-
-    b.addEventListener('click', function () {
-      v.controls = true;
-      var p = v.play();
-      if (p && p.catch) {
-        p.catch(function () {
-          /* se o navegador recusar, devolve o controle ao usuário */
-          b.hidden = false;
-          v.controls = true;
-        });
+  var marcas = document.querySelector('.marcas');
+  var mqBtn = document.querySelector('[data-mq-toggle]');
+  if (marcas && mqBtn) {
+    var mqLabel = mqBtn.querySelector('[data-mq-label]');
+    mqBtn.addEventListener('click', function () {
+      var pausado = marcas.getAttribute('data-mq') === 'paused';
+      if (pausado) {
+        marcas.removeAttribute('data-mq');
+        mqBtn.setAttribute('aria-pressed', 'false');
+        if (mqLabel) mqLabel.textContent = 'Pausar a faixa';
+      } else {
+        marcas.setAttribute('data-mq', 'paused');
+        mqBtn.setAttribute('aria-pressed', 'true');
+        if (mqLabel) mqLabel.textContent = 'Retomar a faixa';
       }
-      b.hidden = true;
     });
-
-    /* ao terminar, volta o pôster e o convite de play */
-    v.addEventListener('ended', function () {
-      v.controls = false;
-      v.currentTime = 0;
-      b.hidden = false;
-    });
-  });
+  }
 
   /* ---------------------------------------------------------------------------
      Consentimento LGPD.

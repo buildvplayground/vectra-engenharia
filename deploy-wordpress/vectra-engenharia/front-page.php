@@ -147,6 +147,12 @@ get_header();
 
   <!-- ============ 03 JORNADA: cena travada horizontal ============ -->
   <section class="jor sec--dark" id="jornada" aria-labelledby="h-jor">
+    <!-- profundidade em 3 camadas: foto real + degradê navy + malha da marca -->
+    <div class="jor__layers" aria-hidden="true">
+      <img src="<?php echo esc_url( VECTRA_URI . '/assets/img/jornada.webp' ); ?>" alt="" loading="lazy" decoding="async" width="2400" height="1601" data-para="0.07">
+      <span class="jor__veil"></span>
+      <span class="jor__mesh"></span>
+    </div>
     <div class="container jor__head">
       <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>03 . Jornada</p>
       <h2 id="h-jor" data-split>Uma única jornada, um único responsável.</h2>
@@ -440,53 +446,61 @@ get_header();
     </div>
   </section>
 
-  <!-- ============ 05 VIDEOS (sem audio: a trilha foi removida do arquivo) ==== -->
-  <section class="sec vid" id="videos" aria-labelledby="h-vid">
-    <div class="container">
+  <!-- ============ 05 VIDEOS: faixa full width, quadro a quadro no scroll ====
+       Sem audio: a trilha foi REMOVIDA do arquivo (ffmpeg -an, 0 streams).
+       No desktop a cena trava e o video anda/volta com a rolagem. Em touch e
+       com prefers-reduced-motion nao trava nada: fica o poster com botao. -->
+  <section class="scr-sec" id="videos" aria-labelledby="h-vid">
+    <div class="container scr__head">
       <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>05 . Vídeos</p>
-      <h2 id="h-vid" data-split>Duas entregas, em movimento.</h2>
-      <p class="lede lede--gap" data-reveal>Peças institucionais gravadas nas obras
-        entregues. Rodam <strong>sem áudio</strong>: as legendas na tela conduzem a
-        leitura. Toque para assistir.</p>
-      <div class="vid__grid">
-          <figure class="vid__i" data-reveal="fig">
-            <div class="vid__frame">
-              <video class="vid__v" poster="assets/img/poster-arena-brahma.webp"
-                     preload="none" playsinline muted
-                     aria-label="Vídeo institucional da obra do Arena Brahma, em Curitiba: 1.230 m² de projeto e execução dentro do estádio, com legendas na tela. Sem áudio.">
-                <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/arena-brahma.mp4' ); ?>" type="video/mp4">
-              </video>
-              <button class="vid__play" type="button" data-play
-                      aria-label="Reproduzir o vídeo de Arena Brahma, 76 s, sem áudio">
-                <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
-              </button>
-            </div>
-            <figcaption class="vid__cap">
-              <span class="pf__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Bar e restaurante</span>
-              <span class="pf__t">Arena Brahma</span>
-              <span class="pf__m"><span>Curitiba/PR</span><span>1.230 m²</span><span>76 s, sem áudio</span></span>
-            </figcaption>
-          </figure>
-          <figure class="vid__i" data-reveal="fig">
-            <div class="vid__frame">
-              <video class="vid__v" poster="assets/img/poster-bioritmo.webp"
-                     preload="none" playsinline muted
-                     aria-label="Vídeo institucional da unidade Bioritmo Carlos Gomes, em Curitiba: recepção, vestiários e salas de treino entregues pela Vectra, com legendas na tela. Sem áudio.">
-                <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/bioritmo.mp4' ); ?>" type="video/mp4">
-              </video>
-              <button class="vid__play" type="button" data-play
-                      aria-label="Reproduzir o vídeo de Bioritmo Carlos Gomes, 74 s, sem áudio">
-                <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
-              </button>
-            </div>
-            <figcaption class="vid__cap">
-              <span class="pf__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Academia</span>
-              <span class="pf__t">Bioritmo Carlos Gomes</span>
-              <span class="pf__m"><span>Curitiba/PR</span><span>1.492 m²</span><span>74 s, sem áudio</span></span>
-            </figcaption>
-          </figure>
-      </div>
+      <h2 id="h-vid" data-split>Duas entregas, quadro a quadro.</h2>
+      <p class="lede lede--gap" data-reveal>Trechos gravados dentro das obras entregues.
+        <strong>Sem áudio</strong>, e a imagem avança ou volta conforme você rola a página.</p>
     </div>
+      <div class="scr" data-scrub aria-labelledby="h-scrub-arena">
+        <div class="scr__stick">
+          <div class="scr__strip">
+            <video class="scr__v" poster="assets/img/scrub-arena-poster.webp"
+                   preload="none" playsinline muted disablepictureinpicture
+                   aria-label="Panorâmica do salão do Arena Brahma, em Curitiba, com as arquibancadas do estádio ao fundo. Trecho sem áudio, que avança conforme a rolagem da página.">
+              <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/scrub-arena.mp4' ); ?>" type="video/mp4">
+            </video>
+            <span class="scr__veil" aria-hidden="true"></span>
+            <button class="scr__play" type="button" data-play
+                    aria-label="Reproduzir o trecho de Arena Brahma, sem áudio">
+              <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
+            </button>
+            <div class="container scr__cap">
+              <p class="scr__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Bar e restaurante</p>
+              <h3 class="scr__t" id="h-scrub-arena">Arena Brahma</h3>
+              <p class="scr__m"><span>Curitiba/PR</span><span>1.230 m²</span><span>Projetos e obra</span><span>sem áudio</span></p>
+            </div>
+            <div class="scr__prog" aria-hidden="true"><i></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="scr" data-scrub aria-labelledby="h-scrub-bioritmo">
+        <div class="scr__stick">
+          <div class="scr__strip">
+            <video class="scr__v" poster="assets/img/scrub-bioritmo-poster.webp"
+                   preload="none" playsinline muted disablepictureinpicture
+                   aria-label="Travelling pelo corredor de musculação da unidade Bioritmo Carlos Gomes, em Curitiba. Trecho sem áudio, que avança conforme a rolagem da página.">
+              <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/scrub-bioritmo.mp4' ); ?>" type="video/mp4">
+            </video>
+            <span class="scr__veil" aria-hidden="true"></span>
+            <button class="scr__play" type="button" data-play
+                    aria-label="Reproduzir o trecho de Bioritmo Carlos Gomes, sem áudio">
+              <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
+            </button>
+            <div class="container scr__cap">
+              <p class="scr__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Academia</p>
+              <h3 class="scr__t" id="h-scrub-bioritmo">Bioritmo Carlos Gomes</h3>
+              <p class="scr__m"><span>Curitiba/PR</span><span>1.492 m²</span><span>Projetos e obra</span><span>sem áudio</span></p>
+            </div>
+            <div class="scr__prog" aria-hidden="true"><i></i></div>
+          </div>
+        </div>
+      </div>
   </section>
 
   <!-- ============ 06 VECTRA ============ -->
@@ -533,8 +547,36 @@ get_header();
     <div class="container marcas__h">
       <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Marcas que confiam na entrega Vectra</p>
       <h2 id="h-marcas" class="sr">Marcas que confiam na entrega Vectra</h2>
+      <button class="marcas__btn" type="button" data-mq-toggle aria-pressed="false">
+        <span data-mq-label>Pausar a faixa</span>
+      </button>
     </div>
+    <!-- A faixa visível é decorativa e duplicada (a animação anda -50%), então
+         fica aria-hidden. A lista real, abaixo, é a que o leitor de tela recebe:
+         sem ela a informação existiria só no movimento. -->
     <div class="mq" aria-hidden="true"><div class="mq__t"><span class="mq__i">Smart Fit<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Bioritmo<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Vydea<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Festval<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Shopping Palladium<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Jockey Plaza<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Arena Brahma<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Shopping São José<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Hyosung do Brasil<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">ClearCorrect<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">A.Yoshii<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Thá Engenharia<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">GT Building<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Bicalho<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Piemonte<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Laguna<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Palazzo Lumini<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Bruna Passaura<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Léo Cosméticos<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Duvale<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Smart Fit<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Bioritmo<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Vydea<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Festval<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Shopping Palladium<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Jockey Plaza<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Arena Brahma<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Shopping São José<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Hyosung do Brasil<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">ClearCorrect<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">A.Yoshii<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Thá Engenharia<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">GT Building<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Bicalho<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Piemonte<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Laguna<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Palazzo Lumini<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Bruna Passaura<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Léo Cosméticos<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span><span class="mq__i">Duvale<svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg></span></div></div>
+    <ul class="sr" data-marcas-sr>
+      <li>Smart Fit</li>
+      <li>Bioritmo</li>
+      <li>Vydea</li>
+      <li>Festval</li>
+      <li>Shopping Palladium</li>
+      <li>Jockey Plaza</li>
+      <li>Arena Brahma</li>
+      <li>Shopping São José</li>
+      <li>Hyosung do Brasil</li>
+      <li>ClearCorrect</li>
+      <li>A.Yoshii</li>
+      <li>Thá Engenharia</li>
+      <li>GT Building</li>
+      <li>Bicalho</li>
+      <li>Piemonte</li>
+      <li>Laguna</li>
+      <li>Palazzo Lumini</li>
+      <li>Bruna Passaura</li>
+      <li>Léo Cosméticos</li>
+      <li>Duvale</li>
+    </ul>
   </section>
 
   <!-- ============ 06 CONTATO ============ -->

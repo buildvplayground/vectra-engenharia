@@ -192,6 +192,27 @@ body.nav-open .hdr__burger span:nth-child(1){transform:translateY(7.5px) rotate(
 body.nav-open .hdr__burger span:nth-child(2){opacity:0}
 body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
 
+/* Trava por medição: o JS marca data-fit="tight" quando a linha do header não
+   cabe no container, independentemente de breakpoint. Já pegou dois bugs aqui
+   (dois CTAs iguais e o 7º item de menu), então vale como rede permanente. */
+.hdr[data-fit="tight"] .hdr__cta{display:none}
+.hdr[data-fit="drawer"] .hdr__burger{display:flex}
+.hdr[data-fit="drawer"] .nav{
+  position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);
+  flex-direction:column;align-items:flex-start;justify-content:flex-start;
+  gap:0;padding:calc(var(--header-h) + 26px) 26px 30px;
+  background:var(--paper);border-left:1px solid var(--rule);
+  transform:translateX(101%);transition:transform .46s var(--e);
+  overflow-y:auto;z-index:99}
+body.nav-open .hdr[data-fit="drawer"] .nav,
+.hdr[data-fit="drawer"] .nav{transform:translateX(101%)}
+body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
+.hdr[data-fit="drawer"] .nav__a{width:100%;padding:16px 0;
+  border-bottom:1px solid var(--rule);font-size:1.0625rem}
+.hdr[data-fit="drawer"] .nav__a::after{display:none}
+.hdr[data-fit="drawer"] .nav__cta{display:block;margin-top:22px}
+.hdr[data-fit="drawer"] .nav__cta .btn{width:100%;justify-content:center}
+
 /* ---------- 6. Hero (prancha técnica) ----------------------------------- */
 .hero{position:relative;background:var(--navy-deep);overflow:hidden;
   min-height:clamp(540px,84vh,860px);display:flex;align-items:stretch}
@@ -261,14 +282,20 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   height:clamp(360px,54vh,560px);display:flex;align-items:flex-end}
 .band__bg{position:absolute;inset:-9% 0;overflow:hidden}
 .band__bg img{width:100%;height:100%;object-fit:cover;will-change:transform}
+/* O degradê tem de garantir contraste AA para a legenda medido SOBRE A FOTO,
+   não sobre a cor da seção: com .86 no rodapé o metadado caía para 3,6:1. */
 .band::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(9,24,42,.34) 0%,rgba(9,24,42,.06) 40%,rgba(9,24,42,.86) 100%)}
+  background:linear-gradient(180deg,rgba(9,24,42,.34) 0%,rgba(9,24,42,.06) 38%,
+    rgba(9,24,42,.66) 74%,rgba(9,24,42,.95) 100%)}
 .band__in{position:relative;z-index:2;width:100%;padding-bottom:clamp(30px,4.4vw,52px)}
 .band__cap{max-width:44ch;color:#fff;font:300 clamp(1.32rem,2.2vw,2rem)/1.22 var(--ff-display);
   letter-spacing:-.018em}
-.band__meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 20px;
+.band__meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 0;
   font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gray)}
+  color:#dfe3e7}
+.band__meta span{padding:0 14px}
+.band__meta span:first-child{padding-left:0}
+.band__meta span+span{border-left:1px solid rgba(223,227,231,.42)}
 
 /* ---------- 10. Índice de disciplinas (lista técnica, sem card) --------- */
 .disc{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(40px,5vw,80px);
@@ -292,27 +319,44 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   background:url("../assets/img/malha.svg") repeat;background-size:118px auto}
 
 /* ---------- 11. Jornada (cena travada horizontal) ---------------------- */
-.jor{background:var(--navy-deep);color:var(--on-dark);overflow:hidden}
-.jor__head{padding:var(--sp-sec-lg) 0 clamp(30px,4vw,48px)}
+/* Era navy chapado e sobrava espaço. Agora tem 3 camadas de profundidade
+   (foto real + degradê navy + malha da marca) e o ritmo interno é mais curto. */
+.jor{background:var(--navy-deep);color:var(--on-dark);overflow:hidden;position:relative}
+.jor__layers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.jor__layers img{position:absolute;inset:-8% 0;width:100%;height:116%;
+  object-fit:cover;object-position:50% 42%;will-change:transform}
+.jor__veil{position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(15,43,74,.97) 0%,rgba(15,43,74,.83) 30%,
+      rgba(15,43,74,.86) 66%,rgba(15,43,74,.98) 100%),
+    radial-gradient(115% 78% at 22% 44%,rgba(9,24,42,.16) 0%,rgba(9,24,42,.82) 100%)}
+.jor__mesh{position:absolute;inset:0;opacity:.07;
+  background:url("../assets/img/malha.svg") repeat;background-size:132px auto}
+.jor__head,.jor__scene,.jor__foot{position:relative;z-index:1}
+
+.jor__head{padding:var(--sp-sec-md) 0 clamp(18px,2.2vw,28px)}
 .jor__scene{position:relative}
 .jor__stick{position:relative}
 .jor__track{display:flex;gap:0;will-change:transform}
-.jor__step{flex:0 0 min(78vw,540px);padding:clamp(30px,3.4vw,44px) clamp(28px,3vw,42px);
-  border-left:1px solid var(--rule-dark);display:flex;flex-direction:column}
+.jor__step{flex:0 0 min(74vw,500px);
+  padding:clamp(22px,2.4vw,32px) clamp(20px,2.2vw,30px);
+  border-left:1px solid var(--rule-dark);display:flex;flex-direction:column;
+  min-height:clamp(290px,42vh,430px)}
 .jor__step:first-child{border-left:0}
-.jor__n{font:300 clamp(2.6rem,4.4vw,3.8rem)/1 var(--ff-display);letter-spacing:-.03em;
-  color:rgba(241,241,241,.34);font-variant-numeric:tabular-nums}
-.jor__k{margin-top:16px;font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.14em;
+/* o numeral no topo e o texto na base: preenche a altura em vez de deixar
+   um bloco flutuando no meio da viewport travada */
+.jor__n{font:300 clamp(2.4rem,4vw,3.4rem)/1 var(--ff-display);letter-spacing:-.03em;
+  color:rgba(241,241,241,.36);font-variant-numeric:tabular-nums;margin-bottom:auto}
+.jor__k{margin-top:14px;font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.14em;
   text-transform:uppercase;color:var(--gray)}
-.jor__t{margin-top:10px;font:300 clamp(1.4rem,2.2vw,1.9rem)/1.16 var(--ff-display);
+.jor__t{margin-top:8px;font:300 clamp(1.32rem,2vw,1.78rem)/1.14 var(--ff-display);
   letter-spacing:-.02em;color:#fff}
-.jor__p{margin-top:16px;color:var(--on-dark-mut);font-size:var(--fs-small);line-height:1.62}
-/* régua de progresso da cena */
-.jor__rule{height:1px;background:var(--rule-dark);margin-top:clamp(28px,3.4vw,44px);
+.jor__p{margin-top:12px;color:var(--on-dark-mut);font-size:var(--fs-small);line-height:1.58}
+.jor__rule{height:1px;background:var(--rule-dark);margin-top:clamp(20px,2.4vw,32px);
   position:relative}
 .jor__rule i{position:absolute;inset:0;background:var(--gray);transform:scaleX(0);
   transform-origin:left}
-.jor__foot{padding:clamp(28px,3.4vw,42px) 0 var(--sp-sec-lg)}
+.jor__foot{padding:clamp(20px,2.4vw,30px) 0 var(--sp-sec-md)}
 
 /* ---------- 12. Portfólio ----------------------------------------------- */
 .pf{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.2vw,30px);
@@ -375,7 +419,15 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .marcas__h{text-align:center;margin-bottom:26px}
 .marcas__h .eyebrow{justify-content:center;margin:0}
+.marcas__btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+  padding:8px 14px;border-radius:2px;
+  font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--navy);box-shadow:inset 0 0 0 1px var(--rule-strong);
+  transition:background .3s var(--e2)}
+.marcas__btn:hover{background:rgba(20,60,103,.06)}
 .mq{display:flex;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+/* pausa de verdade (WCAG 2.2.2): o hover não serve para quem usa teclado */
+.marcas[data-mq="paused"] .mq__t{animation-play-state:paused}
 .mq__t{display:flex;flex:none;gap:0;animation:mq 44s linear infinite}
 .marcas:hover .mq__t{animation-play-state:paused}
 .mq__i{padding:0 clamp(22px,2.6vw,38px);font:300 clamp(1.1rem,1.8vw,1.6rem)/1 var(--ff-display);
@@ -393,30 +445,63 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   font-size:var(--fs-small);line-height:1.45;color:var(--ink)}
 .esc__mk{width:9px;height:7.8px;margin-top:7px;color:var(--navy);flex:none}
 
-/* ---------- 15b. Vídeos (institucionais, sem áudio) -------------------- */
-/* A trilha de áudio foi removida do próprio arquivo (ffmpeg -an), não é só
-   o atributo `muted`. Play sob demanda: preload="none" não baixa nada até
-   o clique, e nada toca sozinho (WCAG 2.2.2 fica satisfeito por construção). */
-.vid__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,2.8vw,40px);
-  margin-top:clamp(44px,5vw,64px)}
-.vid__i{margin:0;min-width:0}
-.vid__frame{position:relative;background:var(--navy-deep);aspect-ratio:16/9;
-  overflow:hidden;
-  /* mesmo corte de 45° dos cards de obra: a lâmina do símbolo */
-  clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%)}
-.vid__v{display:block;width:100%;height:100%;object-fit:cover;background:var(--navy-deep)}
-.vid__play{position:absolute;inset:0;display:grid;place-items:center;
+/* ---------- 15b. Vídeos: faixa full width, quadro a quadro no scroll ----
+   A trilha de áudio foi removida do próprio arquivo (ffmpeg -an), não é só o
+   atributo `muted`. Os clipes são all-intra (todo quadro é keyframe), que é o
+   que faz o seek por scroll ser instantâneo.
+   Regra de ouro do pin: o wrapper sticky NÃO pode ter `position` inline, senão
+   o estilo inline vence a folha e o pin morre em silêncio. O position vive aqui,
+   sob [data-pin="on"], que o JS liga só quando faz sentido travar. */
+.scr-sec{background:var(--navy-deep);color:var(--on-dark);
+  padding:var(--sp-sec-md) 0 0}
+.scr__head{padding-bottom:clamp(30px,3.6vw,48px)}
+.scr__head .eyebrow{color:var(--gray)}
+.scr__head .eyebrow__mk{color:var(--gray)}
+.scr__head h2{color:#fff}
+.scr__head .lede{color:var(--on-dark-mut)}
+.scr__head .lede strong{color:#fff;font-weight:500}
+
+.scr{position:relative}
+.scr+.scr{margin-top:clamp(6px,1vw,14px)}
+.scr__stick{position:relative}
+.scr__strip{position:relative;width:100%;overflow:hidden;background:#0a1c30;
+  aspect-ratio:1920/776}
+.scr__v{display:block;width:100%;height:100%;object-fit:cover;background:#0a1c30}
+/* véu só na base, para a legenda ficar legível sem apagar a imagem */
+.scr__veil{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(9,24,42,.34) 0%,rgba(9,24,42,0) 26%,
+    rgba(9,24,42,0) 46%,rgba(9,24,42,.9) 100%)}
+.scr__cap{position:absolute;left:0;right:0;bottom:clamp(20px,3vw,40px);z-index:2}
+.scr__seg{display:flex;align-items:center;gap:8px;margin:0 0 8px;
+  font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--gray)}
+.scr__seg svg{width:10px;height:8.6px;flex:none;color:var(--gray)}
+.scr__t{font:300 clamp(1.5rem,3vw,2.6rem)/1.06 var(--ff-display);letter-spacing:-.022em;
+  color:#fff}
+.scr__m{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px 0;
+  font:400 .8125rem/1.4 var(--ff-mono);color:#dfe3e7}
+.scr__m span{padding:0 13px}
+.scr__m span:first-child{padding-left:0}
+.scr__m span+span{border-left:1px solid rgba(223,227,231,.4)}
+/* régua de progresso da cena, na base da faixa */
+.scr__prog{position:absolute;left:0;right:0;bottom:0;height:2px;z-index:3;
+  background:rgba(241,241,241,.16)}
+.scr__prog i{display:block;height:100%;width:100%;background:var(--gray);
+  transform:scaleX(0);transform-origin:left}
+/* convite de play: só aparece quando NÃO há scrub (touch / reduced-motion) */
+.scr__play{position:absolute;inset:0;z-index:2;display:none;place-items:center;
   background:rgba(9,24,42,.3);transition:background .45s var(--e2)}
-.vid__play:hover{background:rgba(9,24,42,.14)}
-.vid__play[hidden]{display:none}
+.scr__play:hover{background:rgba(9,24,42,.14)}
+.scr[data-pin="off"] .scr__play{display:grid}
+.scr[data-pin="off"] .scr__play[hidden]{display:none}
 .vid__pl{width:64px;height:64px;display:grid;place-items:center;
   background:var(--paper);color:var(--navy-deep);
   clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
   transition:transform .45s var(--e),background .3s var(--e2)}
 .vid__pl svg{width:17px;height:19px;margin-left:3px}
-.vid__play:hover .vid__pl{transform:scale(1.07);background:#fff}
-.vid__cap{padding-top:16px}
-.vid__cap .pf__t{margin-top:9px}
+.scr__play:hover .vid__pl{transform:scale(1.07);background:#fff}
+/* a faixa fecha a seção: o rodapé dela é o próximo bloco */
+.scr-sec>.scr:last-of-type{margin-bottom:0}
 
 /* ---------- 16. Contato (CTA: legenda de prancha em 3 passos) ----------- */
 .cta{background:var(--navy-deep);color:var(--on-dark)}
@@ -519,17 +604,26 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
 .ck .btn{padding:12px 20px}
 
 /* ==========================================================================
-   21. Responsivo — mobile-first nos ajustes; zero overflow de 320px a desktop
+   21. Responsivo — mobile-first nos ajustes; zero overflow de 320px a desktop.
+
+   Os breakpoints estão em `em`, não em `px`, de propósito: assim eles também
+   respondem a quem aumenta só o tamanho do texto no navegador (WCAG 1.4.4).
+   Em px, a 200% de fonte o header pedia 1500px de nav e jogava itens do menu
+   para fora da tela; em em, ele colapsa no hambúrguer como deve.
+   Referência: 56.25em = 900px e 73.75em = 1180px com a raiz em 16px.
    ========================================================================== */
 /* Com 7 itens o nav mede 689px. Somado ao logo (147), ao CTA (216) e aos gaps,
    o header pede ~1100px de conteúdo: só cabe quando o container está no teto de
    1200px (1152 úteis). Abaixo disso o CTA sai e sobra o botão da gaveta. */
-@media (max-width:1180px){
+@media (max-width:73.75em){
   .nav{gap:22px}
   .hdr__cta{display:none}
 }
 
-@media (max-width:900px){
+@media (max-width:56.25em){
+  /* tablet: entre a faixa cinematográfica e o bloco de imagem */
+  .scr__strip{aspect-ratio:16/8.5}
+
   :root{--header-h:66px}
   .hdr__burger{display:flex}
   .nav{
@@ -570,7 +664,6 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   .jor__head{padding-bottom:clamp(18px,3vw,28px)}
 
   .pf{grid-template-columns:repeat(2,1fr)}
-  .vid__grid{grid-template-columns:1fr}
   .sobre{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}
   .sobre__fig{order:-1}
   .cta__grid{grid-template-columns:1fr}
@@ -580,14 +673,14 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   .gp__i{grid-column:1/-1;margin-top:-6px}
 }
 
-@media (max-width:640px){
+@media (max-width:40em){
   .hero__in{padding-bottom:clamp(120px,22vh,170px)}
   .plate{left:clamp(18px,2.6vw,38px);right:clamp(18px,2.6vw,38px)}
   .plate__v{white-space:normal}
   .band{height:clamp(300px,46vh,420px)}
 }
 
-@media (max-width:560px){
+@media (max-width:35em){
   :root{--fs-body:1.03125rem}
   .container{padding:0 18px}
   .stats__grid{grid-template-columns:1fr}
@@ -596,8 +689,12 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   .stats__l{max-width:none}
   .pf{grid-template-columns:1fr;gap:26px}
   .esc{grid-template-columns:1fr}
-  .vid__frame{clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
   .vid__pl{width:54px;height:54px}
+  /* 1920/776 daria só 158px de altura em 390px de largura: um filete. Em tela
+     estreita a faixa fica mais alta e o object-fit:cover recorta as laterais. */
+  .scr__strip{aspect-ratio:16/11}
+  .scr__t{font-size:clamp(1.3rem,6.4vw,1.9rem)}
+  .scr__m{gap:4px 14px;font-size:.75rem}
   .pf__fig{clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
   .sobre__fig{clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
   .ft__top{grid-template-columns:1fr}
@@ -634,11 +731,11 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
      (<=900px) o deslocamento em X passa a empurrar o bloco 26px para fora do
      container e cria overflow horizontal antes da entrada: some com ele e
      deixa o reveal vertical padrão assumir. */
-  @media (min-width:900px){
+  @media (min-width:56.25em){
     html[data-motion] [data-rv="left"]{transform:translateX(-26px)}
     html[data-motion] [data-rv="right"]{transform:translateX(26px)}
   }
-  @media (max-width:899.98px){
+  @media (max-width:56.24em){
     html[data-motion] [data-rv="left"],
     html[data-motion] [data-rv="right"]{transform:translateY(24px);filter:blur(5px)}
   }
@@ -657,10 +754,17 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   html[data-motion] .w[data-on]>i{transform:none}
 
   /* cena travada da jornada (só desktop, ligada pelo JS) */
-  @media (min-width:900px){
+  @media (min-width:56.25em){
     .jor__scene[data-pin="on"] .jor__stick{position:sticky;top:0;height:100vh;
       display:flex;flex-direction:column;justify-content:center}
     .jor__scene[data-pin="on"] .jor__track{align-items:stretch}
+
+    /* faixa de vídeo travada: o strip ocupa a viewport inteira enquanto a
+       rolagem avança os quadros. Sem `position` inline em lugar nenhum. */
+    .scr[data-pin="on"] .scr__stick{position:sticky;top:0;height:100vh;
+      display:flex;align-items:center}
+    .scr[data-pin="on"] .scr__strip{aspect-ratio:auto;height:min(100vh,100vh);
+      max-height:100vh}
   }
 }
 

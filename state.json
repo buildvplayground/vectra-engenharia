@@ -46,13 +46,13 @@
       "n": 5,
       "nome": "Front-end",
       "status": "done",
-      "nota": "revisar-frontend rodado; 7 achados bloqueantes corrigidos; 0 pendentes. Inclui a secao de videos e o escopo de obra do material novo."
+      "nota": "revisar-frontend + WCAG 2.0 A/AA + Nielsen; 13 achados bloqueantes corrigidos ao todo; 0 pendentes."
     },
     {
       "n": 6,
       "nome": "Ajustes finais",
       "status": "done",
-      "nota": "webp 384,4MB->16,8MB (-95,6%); videos 639MB->23,5MB sem audio; overflow 0 em 28 larguras x 3 paginas (84 combinacoes)."
+      "nota": "imagens 384,4MB->16,8MB; videos 639MB->5,9MB sem audio; overflow 0 em 28 larguras x 4 paginas (112 combinacoes); 1.4.4 ok a 100/150/200% da fonte padrao."
     },
     {
       "n": 7,
@@ -82,10 +82,12 @@
     "auditorias": [
       "_work/audit.py",
       "_work/audit_wcag.py",
+      "_work/audit_contraste_midia.py",
+      "_work/audit_wcag20_nielsen.py",
       "_work/audit_buildv.py"
     ],
-    "preview": "_work/preview.py (registra o MIME de .webp)",
-    "videos": "Site/assets/video/ (2 MP4 sem trilha de audio) + posters em assets/img/"
+    "preview": "_work/preview.py (MIME de .webp + HTTP Range, que o video precisa)",
+    "videos": "Site/assets/video/ (2 trechos all-intra, sem trilha de audio) + posters sem legenda em assets/img/"
   },
   "metricas": {
     "obras_no_portfolio": 12,
@@ -128,10 +130,13 @@
     "achados_bloqueantes_abertos": 0,
     "secoes": 14,
     "videos": 2,
-    "video_mb": 23.5,
+    "video_mb": 5.9,
     "video_audio_streams": 0,
     "larguras_testadas_n": 28,
-    "combinacoes_pagina_largura": 84
+    "combinacoes_pagina_largura": 84,
+    "video_trecho_s": "5,0 e 4,0 (all-intra, 20 fps)",
+    "auditorias": "5 (responsiva, WCAG DOM, contraste sobre midia, WCAG 2.0+Nielsen, BuildV)",
+    "paginas": 4
   },
   "links": {
     "drive": "https://drive.google.com/drive/folders/1_goFn61f2bXh3ow5COE7qgCC-6P4yVwo",
@@ -231,18 +236,18 @@
     },
     {
       "id": "video-peso",
-      "prioridade": "media",
+      "prioridade": "resolvida",
       "bloqueia_deploy": false,
-      "titulo": "Peso dos videos no repositorio (23,5 MB)",
-      "detalhe": "Os dois MP4 (11,9 + 11,0 MB) estao versionados junto da pasta de deploy. Nao afetam o carregamento (preload=\"none\": nada baixa antes do clique), mas incham o repo. Se preferir, movemos para um CDN/Vercel Blob e deixamos so a URL. Decisao sua.",
+      "titulo": "Peso dos videos: resolvido (23,5 MB -> 5,9 MB)",
+      "detalhe": "RESOLVIDO. Ao trocar as pecas inteiras pelos trechos usados na cena de scroll, o video caiu de 23,5 MB para 5,9 MB. Nao ha mais motivo para mover para CDN.",
       "onde": "deploy-vercel/assets/video/"
     },
     {
       "id": "video-legenda",
-      "prioridade": "baixa",
+      "prioridade": "media",
       "bloqueia_deploy": false,
-      "titulo": "Os videos tem legenda e marca dágua queimadas",
-      "detalhe": "As duas pecas foram produzidas para tocar COM narracao, e a legenda queimada carrega essa narracao. Sem audio, a mensagem continua legivel, e por isso ficaram numa secao propria com play sob demanda, e nao como textura de fundo atras de texto (a legenda e a marca dagua brigariam com qualquer texto sobreposto). Se quiser video de fundo, precisamos de material limpo, sem legenda e sem marca dagua.",
+      "titulo": "Legenda e marca dagua queimadas: resolvido por recorte",
+      "detalhe": "RESOLVIDO. A faixa usa um recorte cinematografico 2,4:1 do meio do quadro, que deixa a marca dagua (topo) e a legenda (base) fora. As pecas COMPLETAS nao estao mais embutidas no site: se quiser publicar as versoes integrais, o melhor caminho e YouTube/Instagram com player proprio, e a gente linka.",
       "onde": "Site/index.html -> section#videos"
     },
     {
@@ -252,6 +257,14 @@
       "titulo": "Obras do site antigo sem foto",
       "detalhe": "Shopping Palladium, Industria ClearCorrect, Hyosung do Brasil, Shopping Sao Jose, Palazzo Lumini e Smart Fit Gravatai entraram apenas como NOME na barra de marcas, porque nao ha foto delas no Drive. Com fotos, viram card no portfolio.",
       "onde": "Site/index.html -> section.marcas"
+    },
+    {
+      "id": "videos-completos",
+      "prioridade": "baixa",
+      "bloqueia_deploy": false,
+      "titulo": "As pecas institucionais completas sairam do site",
+      "detalhe": "O site agora usa so os trechos de 5s e 4s na cena de scroll. As pecas de 75s (com narracao e legenda) nao estao mais embutidas. Se quiser oferecer a versao completa, sugiro subir no YouTube e linkar: evita 23 MB no site e da controle de audio ao visitante.",
+      "onde": "Site/index.html -> section#videos"
     }
   ],
   "fontes_de_copy": [

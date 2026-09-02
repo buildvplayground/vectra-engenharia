@@ -109,7 +109,9 @@ registra o MIME. Sem isso, "a imagem não aparece" parece bug do site.
 
 | Auditoria | Resultado |
 |---|---|
-| `_work/audit.py` | overflow horizontal **0** em **28 larguras × 3 páginas** (84 combinações, 320→1920px); menu, lightbox, reveals, pin, vídeos e console sem achados |
+| `_work/audit.py` | overflow horizontal **0** em **28 larguras × 4 páginas** (112 combinações, 320→1920px); menu, lightbox, reveals, pin, scrub e console sem achados |
+| `_work/audit_contraste_midia.py` | contraste **medido em pixel** de 28 blocos de texto sobre foto/vídeo: todos ≥ AA |
+| `_work/audit_wcag20_nielsen.py` | WCAG 2.0 A/AA critério por critério + heurísticas de Nielsen: sem achados |
 | `_work/audit_wcag.py` | contraste, hierarquia de heading, `alt`, nome acessível, alvo de toque, `<strong>` em texto muted, `rel=noopener`, `prefers-reduced-motion`: **sem achados** |
 | `_work/audit_buildv.py` | **29/29** requisitos BuildV obrigatórios |
 | `deploy-vercel/` | mesma bateria de responsividade: **sem achados** |
@@ -117,7 +119,7 @@ registra o MIME. Sem isso, "a imagem não aparece" parece bug do site.
 
 Imagens: **384,4 MB → 16,8 MB** em `.webp` (95,6% menor), com deduplicação perceptual
 (descarta quadros quase idênticos; ex.: Vydea 114 → 9 fotos).
-Vídeos: **639 MB → 23,5 MB**, com **0 streams de áudio** (verificado com `ffprobe`).
+Vídeos: **639 MB → 5,9 MB**, com **0 streams de áudio** (verificado com `ffprobe`).
 
 ---
 
@@ -171,6 +173,92 @@ classes do card (`.pf__seg`, `.pf__t`, `.pf__m`).
 para 689px; somado ao logo e ao CTA, o header passou a pedir 1125px onde havia 1120.
 O CTA do header agora sai abaixo de **1180px** (era 1080px). Reauditado em 28 larguras,
 incluindo 1180 e 1181 de propósito, para cobrir a borda.
+
+---
+
+## Terceira passada: vídeo travado no scroll + Jornada (02/09/2026)
+
+### A faixa de vídeo, quadro a quadro
+
+Full width, a cena **trava** e a imagem avança ou volta conforme a rolagem.
+
+- **Trecho, não a peça inteira.** As peças têm 75s; a cena usa **5,0s** (Arena Brahma)
+  e **4,0s** (Bioritmo). Os trechos foram escolhidos por medição
+  (`_work/pick_trecho2.py`): sem corte de cena, com movimento de câmera contínuo e
+  brilho utilizável. Os dois primeiros candidatos foram descartados a olho, porque
+  tinham a apresentadora falando para a câmera, o que não se sustenta sem áudio.
+- **Recorte 2,4:1 resolve legenda e marca d'água.** As peças são narradas e têm legenda
+  queimada quase do início ao fim, além da marca d'água no topo. Recortando uma faixa
+  cinematográfica do meio do quadro (`crop=3474:1404:183:259`), os dois desaparecem e
+  qualquer trecho passa a ser usável. Foi o que destravou a escolha.
+- **All-intra é o que faz o scrub não engasgar.** Codificado com `-g 1`: todo quadro é
+  keyframe, então `currentTime` cai no quadro exato sem decodificar um GOP inteiro.
+  1920×776, 20 fps, `-an`.
+- **Peso caiu.** 639 MB de origem → **5,9 MB** (era 23,5 MB com as peças inteiras).
+- **Touch e reduced-motion não travam nada:** `data-pin="off"`, e fica o pôster com
+  botão de play. A proporção muda para 16/11 em tela estreita, senão a faixa 2,47:1
+  viraria um filete de 158px.
+- **Pôster sem legenda**, escolhido por varredura (`_work/pick_poster.py`).
+
+### A Jornada
+
+Estava navy chapado e com um bloco flutuando no meio da viewport travada. Agora:
+- **Três camadas de profundidade:** foto real (corredor de cabine primária do Jockey,
+  com perspectiva de um ponto, que conversa com a ideia de jornada) + degradê navy em
+  duas direções + a **malha oficial da marca** a 7%.
+- **Ritmo mais curto:** cabeça de `--sp-sec-lg` para `--sp-sec-md`, passo de 30/44px
+  para 22/32px, rodapé encurtado.
+- **A altura passou a ser preenchida:** o numeral vai para o topo (`margin-bottom:auto`)
+  e o texto encosta na base, em vez de tudo centralizado com vazio em volta.
+
+---
+
+## Revisão WCAG 2.0 (A/AA) e heurísticas de Nielsen
+
+Rodada com `_work/audit_wcag20_nielsen.py` (critério por critério) e
+`_work/audit_contraste_midia.py`. **Sem achados mecânicos** ao final. O que foi
+corrigido nesta rodada:
+
+| Critério | Achado | Correção |
+|---|---|---|
+| **1.4.3 (AA)** | O metadado das faixas dava **3,63:1** e **4,22:1** medido **sobre a foto** (o checador de DOM passava, porque resolvia o fundo pela cor da seção) | Degradê da faixa reforçado e texto de `#adabab` para `#dfe3e7` |
+| **1.4.4 (AA)** | A 200% da fonte padrão o header pedia 1500px de nav e jogava itens do menu fora da tela | Breakpoints de `px` para **`em`** (respondem ao zoom de texto) + trava por medição no header |
+| **2.2.2 (A)** | A faixa de marcas rodava infinitamente e o `:hover` não serve para teclado | Botão real de **pausar/retomar**, com `aria-pressed` |
+| **1.1.1 / 1.3.1 (A)** | Os nomes de cliente existiam só no marquee, que é `aria-hidden`: leitor de tela não recebia nada | Lista `<ul>` real, visualmente oculta, com os nomes |
+| **4.1.2 (A)** | `aria-controls="menu"` apontava para um id que não existia | `id="menu"` no `<nav>` |
+| **Nielsen 9** | O deploy estático não tinha página de erro (só o tema WordPress tinha) | `404.html`, com as rotas principais e os telefones |
+
+Verificações que passaram sem correção: 1.1.1, 1.2.1 (vídeo sem áudio com alternativa em
+texto), 1.3.1, 1.3.2, 1.4.1, 2.1.1, 2.1.2, 2.4.1, 2.4.2, 2.4.3, 2.4.5, 2.4.6, 2.4.7,
+3.1.1, 3.2.x, 4.1.1. **18 paradas de Tab, todas com nome acessível e foco visível.**
+
+**Notas de julgamento** (não são achados, ficam registradas):
+- **3.1.2 (AA), idioma de partes:** "turn key" e "BIM" ficaram sem `lang="en"`. São jargão
+  naturalizado no setor de construção no Brasil e aparecem como termo técnico, não como
+  citação em outra língua.
+- **1.2.1:** os vídeos são *video-only* sem áudio. A alternativa em texto é o `aria-label`
+  de cada um, mais o nome, cidade, metragem e papel na legenda visível, mais a introdução
+  da seção. Não há narração para transcrever, porque o áudio foi removido do arquivo.
+- **2.2.2 e a cena de scroll:** a faixa de vídeo não toca sozinha em nenhum cenário, então
+  não há o que pausar. O movimento é 100% conduzido pela rolagem do usuário.
+
+### Nielsen, as dez heurísticas
+
+1. **Visibilidade do estado:** barra de leitura, régua da cena travada, régua do vídeo,
+   scroll-spy no menu, contador do lightbox.
+2. **Linguagem do usuário:** "disciplinas", "compatibilização", "obra turn key", "prancha".
+   É o vocabulário dos próprios decks do cliente.
+3. **Controle e liberdade:** nada toca sozinho, o scrub é reversível, lightbox sai no `Esc`,
+   a faixa de marcas tem pausa, o menu fecha no `Esc` e no véu.
+4. **Consistência:** o mesmo marcador da marca, o mesmo corte de 45°, o mesmo padrão de
+   legenda no card de obra e na faixa de vídeo.
+5. **Prevenção de erro:** sem formulário, WhatsApp com texto pré-preenchido, `rel=noopener`
+   em todo link externo.
+6. **Reconhecer em vez de lembrar:** menu numerado 01 a 07 com scroll-spy.
+7. **Flexibilidade:** âncoras, link de pular para o conteúdo, teclado no lightbox.
+8. **Estética e minimalismo:** paleta de quatro valores da marca, sem acento inventado.
+9. **Recuperação de erro:** `404.html` e `404.php` com rotas e telefones.
+10. **Ajuda:** os três passos de "como solicitar seu orçamento".
 
 ---
 

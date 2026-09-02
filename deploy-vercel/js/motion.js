@@ -211,7 +211,7 @@
     var span = 0, on = false;
 
     function measure() {
-      var want = innerWidth >= 900 && innerHeight >= 560;
+      var want = matchMedia('(min-width: 56.25em)').matches && innerHeight >= 560;
       if (want !== on) {
         on = want;
         scene.setAttribute('data-pin', on ? 'on' : 'off');
@@ -244,6 +244,124 @@
     addEventListener('resize', measure);
     /* as fotos podem mudar a largura da trilha depois de carregar */
     addEventListener('load', measure);
+  }
+
+  /* ===========================================================================
+     5b. Faixa de vídeo travada — o quadro segue a rolagem (pin + scrub)
+
+     Os clipes são all-intra (todo quadro é keyframe), então `currentTime` cai no
+     quadro exato sem esperar decodificação de GOP: é isso que faz o scrub não
+     engasgar. O tempo alvo é interpolado (lerp) para a imagem não "pular" quando
+     a roda do mouse manda deltas grandes.
+
+     Só trava em desktop com ponteiro fino. Em touch e com prefers-reduced-motion
+     o pin fica desligado (data-pin="off") e o CSS mostra o pôster com botão de
+     play, sem nada tocando sozinho.
+     =========================================================================== */
+  function initScrub() {
+    var cenas = [].slice.call(document.querySelectorAll('[data-scrub]'));
+    if (!cenas.length) return;
+
+    var fino = matchMedia('(hover: hover) and (pointer: fine)');
+
+    cenas.forEach(function (cena) {
+      var v = cena.querySelector('video');
+      var barra = cena.querySelector('.scr__prog i');
+      var btn = cena.querySelector('[data-play]');
+      if (!v) return;
+
+      var on = false, alvo = 0, atual = 0, rodando = false, pronto = false;
+      var marcado = false;   /* o atributo data-pin já foi escrito alguma vez? */
+      var navegavel = true;  /* o vídeo aceita seek? (exige HTTP Range no servidor) */
+
+      /* baixa o clipe só quando a cena chega perto: preload="none" no HTML */
+      var ioLoad = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          ioLoad.disconnect();
+          v.preload = 'auto';
+          try { v.load(); } catch (err) { /* ignora */ }
+        });
+      }, { rootMargin: '150% 0px' });
+      ioLoad.observe(cena);
+
+      v.addEventListener('loadedmetadata', function () {
+        pronto = isFinite(v.duration) && v.duration > 0;
+        medir();
+      });
+
+      /* Sem HTTP Range o navegador marca o vídeo como não navegável
+         (`seekable` vazio) e todo `currentTime = x` é ignorado. Aí travar a
+         tela mostraria um quadro congelado: melhor desligar o pin e oferecer
+         o play normal. */
+      v.addEventListener('canplay', function () {
+        if (!v.seekable || v.seekable.length === 0 ||
+            v.seekable.end(v.seekable.length - 1) <= 0) {
+          navegavel = false;
+          medir();
+        }
+      });
+
+      var largo = matchMedia('(min-width: 56.25em)');   /* o mesmo 900px do CSS,
+        em em: acompanha o zoom de texto, que innerWidth em px ignoraria */
+      function querTravar() {
+        return navegavel && fino.matches && largo.matches && innerHeight >= 520;
+      }
+
+      function medir() {
+        var quer = querTravar();
+        if (quer !== on || !marcado) {
+          on = quer;
+          marcado = true;
+          cena.setAttribute('data-pin', on ? 'on' : 'off');
+          if (!on) {
+            cena.style.height = '';
+            if (barra) barra.style.transform = '';
+          }
+        }
+        if (!on) return;
+        /* duração da cena = 100vh (o pin) + o trecho de rolagem que anima */
+        cena.style.height = Math.round(innerHeight * 2.15) + 'px';
+        tick();
+      }
+
+      function tick() {
+        if (!on || !pronto) return;
+        var r = cena.getBoundingClientRect();
+        var total = cena.offsetHeight - innerHeight;
+        var p = total > 0 ? clamp(-r.top / total, 0, 1) : 0;
+        alvo = p * (v.duration - 0.01);
+        if (barra) barra.style.transform = 'scaleX(' + p + ')';
+        if (!rodando) { rodando = true; raf(loop); }
+      }
+
+      function loop() {
+        atual += (alvo - atual) * 0.18;
+        if (Math.abs(alvo - atual) < 0.008) { atual = alvo; rodando = false; }
+        if (v.readyState >= 1) {
+          try { v.currentTime = atual; } catch (err) { /* seek em curso */ }
+        }
+        if (rodando) raf(loop);
+      }
+
+      /* fora do scrub: play sob demanda, com controles nativos */
+      if (btn) {
+        btn.addEventListener('click', function () {
+          v.controls = true;
+          var pr = v.play();
+          if (pr && pr.catch) { pr.catch(function () { btn.hidden = false; }); }
+          btn.hidden = true;
+        });
+        v.addEventListener('ended', function () {
+          v.controls = false; v.currentTime = 0; btn.hidden = false;
+        });
+      }
+
+      medir();
+      addEventListener('scroll', tick, { passive: true });
+      addEventListener('resize', medir);
+      if (fino.addEventListener) fino.addEventListener('change', medir);
+    });
   }
 
   /* ===========================================================================
@@ -411,6 +529,7 @@
       drawFrame();
       initCounters();
       initScene();
+      initScrub();
       initParallax();
       initChrome();
       initSmooth();
