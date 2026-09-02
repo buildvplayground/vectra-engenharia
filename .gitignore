@@ -1,0 +1,68 @@
+# ==========================================================================
+# Padrão de versionamento BuildV: o repo rastreia SÓ a pasta de deploy + o
+# estado. Material-fonte fica local + Google Drive, fora do git.
+# ==========================================================================
+
+# --- material-fonte (local + Drive) ---
+_raw/
+_work/
+imagens/
+Marca/
+Copys/
+design-system/
+Site/
+"site antigo"/
+site\ antigo/
+brief-pack.md
+
+# --- segredos: nunca no git ---
+*.env
+.env
+.env.*
+!.env.example
+db-config.php
+!db-config.example.php
+*-credentials.json
+*credentials*.json
+*secret*
+*.pem
+*.key
+*.p12
+.htpasswd
+
+# --- sistema / editor ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.idea/
+.vscode/
+*.sublime-*
+*.swp
+*.swo
+*~
+
+# --- dependências / build de terceiros ---
+node_modules/
+vendor/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.vercel/
+
+# --- binários intermediários pesados ---
+*.psd
+*.ai
+*.rar
+*.zip
+*.7z
+*.mp4
+*.mov
+*.tmp
+*.log
