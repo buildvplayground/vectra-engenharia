@@ -502,8 +502,11 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
 /* ==========================================================================
    21. Responsivo — mobile-first nos ajustes; zero overflow de 320px a desktop
    ========================================================================== */
-@media (max-width:1080px){
-  .nav{gap:20px}
+/* Com 7 itens o nav mede 689px. Somado ao logo (147), ao CTA (216) e aos gaps,
+   o header pede ~1100px de conteúdo: só cabe quando o container está no teto de
+   1200px (1152 úteis). Abaixo disso o CTA sai e sobra o botão da gaveta. */
+@media (max-width:1180px){
+  .nav{gap:22px}
   .hdr__cta{display:none}
 }
 

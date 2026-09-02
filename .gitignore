@@ -66,3 +66,8 @@ venv/
 *.mov
 *.tmp
 *.log
+
+# ...MAS o vídeo tratado faz parte do entregável: a pasta de deploy tem de
+# subir autossuficiente. Os originais de 4K seguem fora (estão em `imagens/`).
+!deploy-vercel/assets/video/*.mp4
+!deploy-wordpress/vectra-engenharia/assets/video/*.mp4
