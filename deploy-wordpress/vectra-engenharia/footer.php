@@ -21,7 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#disciplinas' ); ?>">Disciplinas</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Jornada</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Obras</a></li>
-          <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#videos' ); ?>">Vídeos</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>">A Vectra</a></li>
         </ul>
       </div>

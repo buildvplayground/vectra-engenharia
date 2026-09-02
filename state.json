@@ -46,7 +46,7 @@
       "n": 5,
       "nome": "Front-end",
       "status": "done",
-      "nota": "revisar-frontend + WCAG 2.0 A/AA + Nielsen; 13 achados bloqueantes corrigidos ao todo; 0 pendentes."
+      "nota": "revisar-frontend + WCAG 2.0 A/AA + Nielsen; 14 achados bloqueantes corrigidos ao todo; 0 pendentes."
     },
     {
       "n": 6,
@@ -130,13 +130,15 @@
     "achados_bloqueantes_abertos": 0,
     "secoes": 14,
     "videos": 2,
-    "video_mb": 5.9,
+    "video_mb": 6.9,
     "video_audio_streams": 0,
     "larguras_testadas_n": 28,
     "combinacoes_pagina_largura": 84,
-    "video_trecho_s": "5,0 e 4,0 (all-intra, 20 fps)",
+    "video_trecho_s": "5,95 (Arena) e 4,35 (Bioritmo), all-intra 20 fps",
     "auditorias": "5 (responsiva, WCAG DOM, contraste sobre midia, WCAG 2.0+Nielsen, BuildV)",
-    "paginas": 4
+    "paginas": 4,
+    "video_posicao": "2 faixas full-bleed distribuidas (secoes 7 e 10 de 14)",
+    "nav_itens": 6
   },
   "links": {
     "drive": "https://drive.google.com/drive/folders/1_goFn61f2bXh3ow5COE7qgCC-6P4yVwo",
@@ -238,8 +240,8 @@
       "id": "video-peso",
       "prioridade": "resolvida",
       "bloqueia_deploy": false,
-      "titulo": "Peso dos videos: resolvido (23,5 MB -> 5,9 MB)",
-      "detalhe": "RESOLVIDO. Ao trocar as pecas inteiras pelos trechos usados na cena de scroll, o video caiu de 23,5 MB para 5,9 MB. Nao ha mais motivo para mover para CDN.",
+      "titulo": "Peso dos videos: resolvido (23,5 MB -> 6,9 MB)",
+      "detalhe": "RESOLVIDO. Trocando as pecas inteiras pelos trechos usados nas cenas de scroll, o video caiu de 23,5 MB para 6,9 MB.",
       "onde": "deploy-vercel/assets/video/"
     },
     {
@@ -265,6 +267,14 @@
       "titulo": "As pecas institucionais completas sairam do site",
       "detalhe": "O site agora usa so os trechos de 5s e 4s na cena de scroll. As pecas de 75s (com narracao e legenda) nao estao mais embutidas. Se quiser oferecer a versao completa, sugiro subir no YouTube e linkar: evita 23 MB no site e da controle de audio ao visitante.",
       "onde": "Site/index.html -> section#videos"
+    },
+    {
+      "id": "video-trecho-limite",
+      "prioridade": "baixa",
+      "bloqueia_deploy": false,
+      "titulo": "O trecho do Bioritmo esta no limite do material (4,35s)",
+      "detalhe": "O plano original tinha 5s. Medindo os cortes do arquivo original, a janela limpa mais longa do Bioritmo (sem corte de cena e sem a apresentadora falando para a camera) tem 4,3s: ha corte em 45,8s e outro em 50,4s. O Arena deu 5,95s (corte em 64,4s e o selo VECTRA entrando em 70,8s). Para trechos mais longos precisamos de material bruto com tomadas continuas mais longas, sem legenda queimada e sem apresentador em quadro. Compensei alongando a ROLAGEM da cena para 2,8 telas, o que faz o quadro andar mais devagar e a cena durar mais.",
+      "onde": "_work/enc_scrub.sh"
     }
   ],
   "fontes_de_copy": [

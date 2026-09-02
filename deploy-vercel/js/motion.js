@@ -271,6 +271,7 @@
       if (!v) return;
 
       var on = false, alvo = 0, atual = 0, rodando = false, pronto = false;
+      var tocandoManual = false;   /* o usuario apertou play? (nao e scrub) */
       var marcado = false;   /* o atributo data-pin já foi escrito alguma vez? */
       var navegavel = true;  /* o vídeo aceita seek? (exige HTTP Range no servidor) */
 
@@ -320,8 +321,11 @@
           }
         }
         if (!on) return;
-        /* duração da cena = 100vh (o pin) + o trecho de rolagem que anima */
-        cena.style.height = Math.round(innerHeight * 2.15) + 'px';
+        /* Duração da cena = 100vh (o pin) + o trecho de rolagem que anima.
+           2.8vh dá ~1.8 tela de rolagem por faixa: o quadro anda mais devagar
+           e a cena dura mais, sem precisar de mais material bruto (o trecho
+           limpo do Bioritmo tem 4,3s por causa dos cortes do original). */
+        cena.style.height = Math.round(innerHeight * 2.8) + 'px';
         tick();
       }
 
@@ -330,7 +334,10 @@
         var r = cena.getBoundingClientRect();
         var total = cena.offsetHeight - innerHeight;
         var p = total > 0 ? clamp(-r.top / total, 0, 1) : 0;
-        alvo = p * (v.duration - 0.01);
+        /* nunca encoste em `duration`: chegar la faz o navegador disparar
+           `ended`, e o quadro final voltava para o inicio. Uma margem de um
+           quadro (a 20 fps, 0.05s) mantem a cena no ultimo quadro real. */
+        alvo = p * Math.max(0, v.duration - 0.06);
         if (barra) barra.style.transform = 'scaleX(' + p + ')';
         if (!rodando) { rodando = true; raf(loop); }
       }
@@ -347,12 +354,18 @@
       /* fora do scrub: play sob demanda, com controles nativos */
       if (btn) {
         btn.addEventListener('click', function () {
+          tocandoManual = true;
           v.controls = true;
           var pr = v.play();
           if (pr && pr.catch) { pr.catch(function () { btn.hidden = false; }); }
           btn.hidden = true;
         });
         v.addEventListener('ended', function () {
+          /* só reseta se o vídeo estava tocando de verdade. Durante o scrub,
+             `ended` pode disparar por seek e o reset jogaria a cena para o
+             primeiro quadro justamente no fim da rolagem. */
+          if (!tocandoManual) return;
+          tocandoManual = false;
           v.controls = false; v.currentTime = 0; btn.hidden = false;
         });
       }

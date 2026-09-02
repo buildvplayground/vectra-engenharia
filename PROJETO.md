@@ -119,7 +119,7 @@ registra o MIME. Sem isso, "a imagem não aparece" parece bug do site.
 
 Imagens: **384,4 MB → 16,8 MB** em `.webp` (95,6% menor), com deduplicação perceptual
 (descarta quadros quase idênticos; ex.: Vydea 114 → 9 fotos).
-Vídeos: **639 MB → 5,9 MB**, com **0 streams de áudio** (verificado com `ffprobe`).
+Vídeos: **639 MB → 6,9 MB**, com **0 streams de áudio** (verificado com `ffprobe`).
 
 ---
 
@@ -178,12 +178,20 @@ incluindo 1180 e 1181 de propósito, para cobrir a borda.
 
 ## Terceira passada: vídeo travado no scroll + Jornada (02/09/2026)
 
-### A faixa de vídeo, quadro a quadro
+### As faixas de vídeo, quadro a quadro
 
 Full width, a cena **trava** e a imagem avança ou volta conforme a rolagem.
+São **duas faixas distribuídas na página** (seções 7 e 10 de 14, com três seções entre
+elas), não uma seção com os dois vídeos empilhados. Por isso saíram do menu: viraram
+quebra editorial, não destino, e a numeração voltou a 01-06.
 
-- **Trecho, não a peça inteira.** As peças têm 75s; a cena usa **5,0s** (Arena Brahma)
-  e **4,0s** (Bioritmo). Os trechos foram escolhidos por medição
+- **Trecho, não a peça inteira.** As peças têm 75s; as cenas usam **5,95s** (Arena Brahma)
+  e **4,35s** (Bioritmo), com a rolagem esticada para **2,8 telas** por faixa, o que faz o
+  quadro andar mais devagar e a cena durar mais.
+- **O material limita o comprimento.** Medindo os cortes do original, a janela limpa mais
+  longa do Bioritmo tem 4,3s (corte em 45,8s e em 50,4s). No Arena deu 5,95s (corte em
+  64,4s e o selo VECTRA entrando em 70,8s). Passar disso exigiria material com tomadas
+  contínuas mais longas. Os trechos foram escolhidos por medição
   (`_work/pick_trecho2.py`): sem corte de cena, com movimento de câmera contínuo e
   brilho utilizável. Os dois primeiros candidatos foram descartados a olho, porque
   tinham a apresentadora falando para a câmera, o que não se sustenta sem áudio.
@@ -194,7 +202,11 @@ Full width, a cena **trava** e a imagem avança ou volta conforme a rolagem.
 - **All-intra é o que faz o scrub não engasgar.** Codificado com `-g 1`: todo quadro é
   keyframe, então `currentTime` cai no quadro exato sem decodificar um GOP inteiro.
   1920×776, 20 fps, `-an`.
-- **Peso caiu.** 639 MB de origem → **5,9 MB** (era 23,5 MB com as peças inteiras).
+- **Peso caiu.** 639 MB de origem → **6,9 MB** (era 23,5 MB com as peças inteiras).
+- **Bug do fim da cena, corrigido.** Ao chegar em `duration` o navegador dispara `ended`,
+  e o handler do play manual resetava `currentTime = 0`: o último quadro pulava para o
+  primeiro justamente no fim da rolagem. Agora o reset só vale para play manual, e o
+  scrub para um quadro antes do fim, para o `ended` nem disparar.
 - **Touch e reduced-motion não travam nada:** `data-pin="off"`, e fica o pôster com
   botão de play. A proporção muda para 16/11 em tela estreita, senão a faixa 2,47:1
   viraria um filete de 158px.

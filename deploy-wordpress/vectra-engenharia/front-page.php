@@ -220,6 +220,35 @@ get_header();
     </div>
   </section>
 
+  <!-- ============ FAIXA DE VIDEO: Bioritmo Carlos Gomes ====================
+       Sem audio: a trilha foi REMOVIDA do arquivo (ffmpeg -an, 0 streams).
+       No desktop a cena trava e o quadro anda com a rolagem; em touch e com
+       prefers-reduced-motion nao trava nada e fica o poster com botao. -->
+  <section class="scr-sec" aria-labelledby="h-scrub-bioritmo">
+    <div class="scr" data-scrub>
+      <div class="scr__stick">
+        <div class="scr__strip">
+          <video class="scr__v" poster="assets/img/scrub-bioritmo-poster.webp"
+                 preload="none" playsinline muted disablepictureinpicture
+                 aria-label="Travelling pelo estúdio de spinning da unidade Bioritmo Carlos Gomes, em Curitiba. Trecho de 4 segundos, sem áudio, que avança conforme a rolagem da página.">
+            <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/scrub-bioritmo.mp4' ); ?>" type="video/mp4">
+          </video>
+          <span class="scr__veil" aria-hidden="true"></span>
+          <button class="scr__play" type="button" data-play
+                  aria-label="Reproduzir o trecho de Bioritmo Carlos Gomes, sem áudio">
+            <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
+          </button>
+          <div class="container scr__cap">
+            <p class="scr__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Obra em movimento</p>
+            <h2 class="scr__t" id="h-scrub-bioritmo">Bioritmo Carlos Gomes</h2>
+            <p class="scr__m"><span>Academia</span><span>Curitiba/PR</span><span>1.492 m²</span><span>Projetos e obra</span><span>sem áudio</span></p>
+          </div>
+          <div class="scr__prog" aria-hidden="true"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ 04 OBRAS: portfolio ============ -->
   <section class="sec" id="obras" aria-labelledby="h-obras">
     <div class="container">
@@ -437,78 +466,41 @@ get_header();
     </div>
   </section>
 
-  <!-- ============ FAIXA: arena ============ -->
-  <section class="band" aria-label="Arena Brahma, no estádio em Curitiba">
-    <div class="band__bg"><img src="<?php echo esc_url( VECTRA_URI . '/assets/img/faixa-arena.webp' ); ?>" alt="Salão do Arena Brahma voltado para o gramado do estádio, em Curitiba" loading="lazy" decoding="async" width="2000" height="1333" data-para="0.11"></div>
-    <div class="container band__in">
-      <p class="band__cap" data-reveal="soft">1.230 m² de projeto e obra dentro de um estádio em operação.</p>
-      <p class="band__meta" data-reveal><span>Arena Brahma</span><span>Curitiba/PR</span><span>Projetos e obra</span></p>
-    </div>
-  </section>
-
-  <!-- ============ 05 VIDEOS: faixa full width, quadro a quadro no scroll ====
+  <!-- ============ FAIXA DE VIDEO: Arena Brahma ====================
        Sem audio: a trilha foi REMOVIDA do arquivo (ffmpeg -an, 0 streams).
-       No desktop a cena trava e o video anda/volta com a rolagem. Em touch e
-       com prefers-reduced-motion nao trava nada: fica o poster com botao. -->
-  <section class="scr-sec" id="videos" aria-labelledby="h-vid">
-    <div class="container scr__head">
-      <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>05 . Vídeos</p>
-      <h2 id="h-vid" data-split>Duas entregas, quadro a quadro.</h2>
-      <p class="lede lede--gap" data-reveal>Trechos gravados dentro das obras entregues.
-        <strong>Sem áudio</strong>, e a imagem avança ou volta conforme você rola a página.</p>
+       No desktop a cena trava e o quadro anda com a rolagem; em touch e com
+       prefers-reduced-motion nao trava nada e fica o poster com botao. -->
+  <section class="scr-sec" aria-labelledby="h-scrub-arena">
+    <div class="scr" data-scrub>
+      <div class="scr__stick">
+        <div class="scr__strip">
+          <video class="scr__v" poster="assets/img/scrub-arena-poster.webp"
+                 preload="none" playsinline muted disablepictureinpicture
+                 aria-label="Panorâmica do salão do Arena Brahma, em Curitiba, com as arquibancadas do estádio ao fundo. Trecho de 6 segundos, sem áudio, que avança conforme a rolagem da página.">
+            <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/scrub-arena.mp4' ); ?>" type="video/mp4">
+          </video>
+          <span class="scr__veil" aria-hidden="true"></span>
+          <button class="scr__play" type="button" data-play
+                  aria-label="Reproduzir o trecho de Arena Brahma, sem áudio">
+            <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
+          </button>
+          <div class="container scr__cap">
+            <p class="scr__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Obra em movimento</p>
+            <h2 class="scr__t" id="h-scrub-arena">Arena Brahma</h2>
+            <p class="scr__m"><span>Bar e restaurante</span><span>Curitiba/PR</span><span>1.230 m²</span><span>Projetos e obra</span><span>sem áudio</span></p>
+          </div>
+          <div class="scr__prog" aria-hidden="true"><i></i></div>
+        </div>
+      </div>
     </div>
-      <div class="scr" data-scrub aria-labelledby="h-scrub-arena">
-        <div class="scr__stick">
-          <div class="scr__strip">
-            <video class="scr__v" poster="assets/img/scrub-arena-poster.webp"
-                   preload="none" playsinline muted disablepictureinpicture
-                   aria-label="Panorâmica do salão do Arena Brahma, em Curitiba, com as arquibancadas do estádio ao fundo. Trecho sem áudio, que avança conforme a rolagem da página.">
-              <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/scrub-arena.mp4' ); ?>" type="video/mp4">
-            </video>
-            <span class="scr__veil" aria-hidden="true"></span>
-            <button class="scr__play" type="button" data-play
-                    aria-label="Reproduzir o trecho de Arena Brahma, sem áudio">
-              <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
-            </button>
-            <div class="container scr__cap">
-              <p class="scr__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Bar e restaurante</p>
-              <h3 class="scr__t" id="h-scrub-arena">Arena Brahma</h3>
-              <p class="scr__m"><span>Curitiba/PR</span><span>1.230 m²</span><span>Projetos e obra</span><span>sem áudio</span></p>
-            </div>
-            <div class="scr__prog" aria-hidden="true"><i></i></div>
-          </div>
-        </div>
-      </div>
-      <div class="scr" data-scrub aria-labelledby="h-scrub-bioritmo">
-        <div class="scr__stick">
-          <div class="scr__strip">
-            <video class="scr__v" poster="assets/img/scrub-bioritmo-poster.webp"
-                   preload="none" playsinline muted disablepictureinpicture
-                   aria-label="Travelling pelo corredor de musculação da unidade Bioritmo Carlos Gomes, em Curitiba. Trecho sem áudio, que avança conforme a rolagem da página.">
-              <source src="<?php echo esc_url( VECTRA_URI . '/assets/video/scrub-bioritmo.mp4' ); ?>" type="video/mp4">
-            </video>
-            <span class="scr__veil" aria-hidden="true"></span>
-            <button class="scr__play" type="button" data-play
-                    aria-label="Reproduzir o trecho de Bioritmo Carlos Gomes, sem áudio">
-              <span class="vid__pl"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
-            </button>
-            <div class="container scr__cap">
-              <p class="scr__seg"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Academia</p>
-              <h3 class="scr__t" id="h-scrub-bioritmo">Bioritmo Carlos Gomes</h3>
-              <p class="scr__m"><span>Curitiba/PR</span><span>1.492 m²</span><span>Projetos e obra</span><span>sem áudio</span></p>
-            </div>
-            <div class="scr__prog" aria-hidden="true"><i></i></div>
-          </div>
-        </div>
-      </div>
   </section>
 
-  <!-- ============ 06 VECTRA ============ -->
+  <!-- ============ 05 VECTRA ============ -->
   <section class="sec" id="vectra" aria-labelledby="h-vectra">
     <div class="container">
       <div class="sobre">
         <div>
-          <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>06 . Vectra</p>
+          <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>05 . Vectra</p>
           <h2 id="h-vectra" data-split>Três décadas resolvendo desafios complexos de engenharia.</h2>
           <p class="lede lede--gap" data-reveal>Referência em engenharia de alta
             performance, a Vectra entrega soluções que integram eficiência e precisão técnica.
@@ -584,7 +576,7 @@ get_header();
     <div class="container">
       <div class="cta__grid">
         <div>
-          <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>07 . Contato</p>
+          <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>06 . Contato</p>
           <h2 id="h-contato" data-split>Como solicitar seu orçamento.</h2>
           <div class="cta__act" data-reveal>
             <a class="btn btn--light" data-wa-btn="projetos de instalações ou obra turn key" href="#">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a>

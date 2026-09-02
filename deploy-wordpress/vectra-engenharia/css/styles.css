@@ -433,17 +433,10 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
    Regra de ouro do pin: o wrapper sticky NÃO pode ter `position` inline, senão
    o estilo inline vence a folha e o pin morre em silêncio. O position vive aqui,
    sob [data-pin="on"], que o JS liga só quando faz sentido travar. */
-.scr-sec{background:var(--navy-deep);color:var(--on-dark);
-  padding:var(--sp-sec-md) 0 0}
-.scr__head{padding-bottom:clamp(30px,3.6vw,48px)}
-.scr__head .eyebrow{color:var(--gray)}
-.scr__head .eyebrow__mk{color:var(--gray)}
-.scr__head h2{color:#fff}
-.scr__head .lede{color:var(--on-dark-mut)}
-.scr__head .lede strong{color:#fff;font-weight:500}
-
+/* Faixa full-bleed, sem cabeça: as duas ficam em pontos diferentes da página,
+   como quebra editorial, e não empilhadas numa seção única. */
+.scr-sec{background:var(--navy-deep);color:var(--on-dark);padding:0}
 .scr{position:relative}
-.scr+.scr{margin-top:clamp(6px,1vw,14px)}
 .scr__stick{position:relative}
 .scr__strip{position:relative;width:100%;overflow:hidden;background:#0a1c30;
   aspect-ratio:1920/776}
@@ -482,7 +475,6 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .vid__pl svg{width:17px;height:19px;margin-left:3px}
 .scr__play:hover .vid__pl{transform:scale(1.07);background:#fff}
 /* a faixa fecha a seção: o rodapé dela é o próximo bloco */
-.scr-sec>.scr:last-of-type{margin-bottom:0}
 
 /* ---------- 16. Contato (CTA: legenda de prancha em 3 passos) ----------- */
 .cta{background:var(--navy-deep);color:var(--on-dark)}
