@@ -133,6 +133,41 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Vídeos institucionais — play sob demanda.
+
+     Os arquivos foram codificados SEM trilha de áudio (ffmpeg -an), a pedido do
+     cliente: não é só o atributo `muted`. Com preload="none" nada é baixado até
+     o clique, e como nada toca sozinho não há o problema de auto-play do
+     WCAG 2.2.2. Os controles nativos aparecem depois do primeiro play, para o
+     usuário poder pausar e navegar.
+     --------------------------------------------------------------------------- */
+  document.querySelectorAll('.vid__i').forEach(function (fig) {
+    var v = fig.querySelector('video');
+    var b = fig.querySelector('[data-play]');
+    if (!v || !b) return;
+
+    b.addEventListener('click', function () {
+      v.controls = true;
+      var p = v.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          /* se o navegador recusar, devolve o controle ao usuário */
+          b.hidden = false;
+          v.controls = true;
+        });
+      }
+      b.hidden = true;
+    });
+
+    /* ao terminar, volta o pôster e o convite de play */
+    v.addEventListener('ended', function () {
+      v.controls = false;
+      v.currentTime = 0;
+      b.hidden = false;
+    });
+  });
+
+  /* ---------------------------------------------------------------------------
      Consentimento LGPD.
      O consentimento emite evento no dataLayer para as tags respeitarem a lei.
      --------------------------------------------------------------------------- */

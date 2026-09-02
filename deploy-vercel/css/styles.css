@@ -364,6 +364,41 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
 .mq__i svg{width:10px;height:8.6px;color:var(--gray);flex:none}
 @keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
+/* ---------- 13b. Escopo de execução (lista compacta no split) ----------- */
+/* Reusa os tokens existentes: filete, marcador do símbolo, mono. */
+.sobre--inv .sobre__fig{order:-1}
+.esc{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(18px,2.2vw,32px);
+  margin-top:clamp(26px,3vw,36px)}
+.esc__i{display:grid;grid-template-columns:auto 1fr;gap:0 11px;align-items:start;
+  padding:11px 0;margin:0;border-top:1px solid var(--rule);
+  font-size:var(--fs-small);line-height:1.45;color:var(--ink)}
+.esc__mk{width:9px;height:7.8px;margin-top:7px;color:var(--navy);flex:none}
+
+/* ---------- 15b. Vídeos (institucionais, sem áudio) -------------------- */
+/* A trilha de áudio foi removida do próprio arquivo (ffmpeg -an), não é só
+   o atributo `muted`. Play sob demanda: preload="none" não baixa nada até
+   o clique, e nada toca sozinho (WCAG 2.2.2 fica satisfeito por construção). */
+.vid__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,2.8vw,40px);
+  margin-top:clamp(44px,5vw,64px)}
+.vid__i{margin:0;min-width:0}
+.vid__frame{position:relative;background:var(--navy-deep);aspect-ratio:16/9;
+  overflow:hidden;
+  /* mesmo corte de 45° dos cards de obra: a lâmina do símbolo */
+  clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%)}
+.vid__v{display:block;width:100%;height:100%;object-fit:cover;background:var(--navy-deep)}
+.vid__play{position:absolute;inset:0;display:grid;place-items:center;
+  background:rgba(9,24,42,.3);transition:background .45s var(--e2)}
+.vid__play:hover{background:rgba(9,24,42,.14)}
+.vid__play[hidden]{display:none}
+.vid__pl{width:64px;height:64px;display:grid;place-items:center;
+  background:var(--paper);color:var(--navy-deep);
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+  transition:transform .45s var(--e),background .3s var(--e2)}
+.vid__pl svg{width:17px;height:19px;margin-left:3px}
+.vid__play:hover .vid__pl{transform:scale(1.07);background:#fff}
+.vid__cap{padding-top:16px}
+.vid__cap .pf__t{margin-top:9px}
+
 /* ---------- 16. Contato (CTA: legenda de prancha em 3 passos) ----------- */
 .cta{background:var(--navy-deep);color:var(--on-dark)}
 .cta__grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(38px,5vw,80px);
@@ -513,6 +548,7 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   .jor__head{padding-bottom:clamp(18px,3vw,28px)}
 
   .pf{grid-template-columns:repeat(2,1fr)}
+  .vid__grid{grid-template-columns:1fr}
   .sobre{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}
   .sobre__fig{order:-1}
   .cta__grid{grid-template-columns:1fr}
@@ -537,6 +573,9 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
   .stats__i+.stats__i{border-top:1px solid rgba(241,241,241,.18)}
   .stats__l{max-width:none}
   .pf{grid-template-columns:1fr;gap:26px}
+  .esc{grid-template-columns:1fr}
+  .vid__frame{clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
+  .vid__pl{width:54px;height:54px}
   .pf__fig{clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,0 100%)}
   .sobre__fig{clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
   .ft__top{grid-template-columns:1fr}

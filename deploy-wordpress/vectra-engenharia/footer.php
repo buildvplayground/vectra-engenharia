@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#disciplinas' ); ?>">Disciplinas</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Jornada</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Obras</a></li>
+          <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#videos' ); ?>">Vídeos</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>">A Vectra</a></li>
         </ul>
       </div>
@@ -29,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
         <ul class="ft__l">
           <li><a href="tel:+5541998292317">(41) 99829-2317</a> <span class="ft__tag">projetos</span></li>
           <li><a href="tel:+5541988665477">(41) 98866-5477</a> <span class="ft__tag">obras</span></li>
-          <li>Rua Saldanha Marinho, 1753<br>Bigorrilho, Curitiba/PR</li>
+          <li>Rua Saldanha Marinho, 1753<br>Bigorrilho, Curitiba/PR<br>CEP 80730-180</li>
           <li><a href="https://www.instagram.com/vectraengenharia_e_construcoes/" target="_blank" rel="noopener">Instagram</a></li>
         </ul>
       </div>
