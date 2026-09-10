@@ -229,6 +229,51 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Em cena — player de vídeo em modal (click-to-play, com áudio).
+     Cada .reel carrega data-video/-title/-sub. Abrir injeta a fonte, dá play e
+     trava o scroll; fechar pausa, descarrega a fonte e devolve o foco ao card.
+     --------------------------------------------------------------------------- */
+  var vlb = document.querySelector('[data-vlb]');
+  if (vlb) {
+    var vlbVideo = vlb.querySelector('[data-vlb-video]');
+    var vlbTitle = vlb.querySelector('[data-vlb-title]');
+    var vlbSub = vlb.querySelector('[data-vlb-sub]');
+    var vlbX = vlb.querySelector('.vlb__x');
+    var lastReel = null;
+
+    function openVideo(reel) {
+      lastReel = reel;
+      var src = reel.getAttribute('data-video');
+      if (vlbTitle) vlbTitle.textContent = reel.getAttribute('data-title') || '';
+      if (vlbSub) vlbSub.textContent = reel.getAttribute('data-sub') || '';
+      vlbVideo.setAttribute('src', src);
+      vlb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var p = vlbVideo.play();
+      if (p && p.catch) p.catch(function () { /* autoplay bloqueado: fica o controle nativo */ });
+      if (vlbX) vlbX.focus();
+    }
+
+    function closeVideo() {
+      vlbVideo.pause();
+      vlbVideo.removeAttribute('src');
+      vlbVideo.load();
+      vlb.hidden = true;
+      document.body.style.overflow = '';
+      if (lastReel) { lastReel.focus(); lastReel = null; }
+    }
+
+    document.querySelectorAll('.reel[data-video]').forEach(function (reel) {
+      reel.addEventListener('click', function () { openVideo(reel); });
+    });
+    if (vlbX) vlbX.addEventListener('click', closeVideo);
+    vlb.addEventListener('click', function (e) { if (e.target === vlb) closeVideo(); });
+    addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !vlb.hidden) closeVideo();
+    });
+  }
+
+  /* ---------------------------------------------------------------------------
      Ano do rodapé
      --------------------------------------------------------------------------- */
   var yr = document.querySelector('[data-year]');

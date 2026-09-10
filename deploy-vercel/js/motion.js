@@ -404,13 +404,19 @@
      =========================================================================== */
   function initChrome() {
     var hdr = document.querySelector('.hdr');
+    var hero = document.querySelector('.hero');
+    var after = document.querySelector('.afterhero');
+    if (hdr && hero) hdr.setAttribute('data-hero', 'true');
     var prog = document.querySelector('.prog');
     var secs = [].slice.call(document.querySelectorAll('main section[id]'));
     var links = [].slice.call(document.querySelectorAll('.nav__a[href^="#"]'));
 
     function tick() {
       var y = scrollY;
-      if (hdr) hdr.setAttribute('data-solid', y > 40 ? 'true' : 'false');
+      if (hdr) {
+        var solid = after ? (after.getBoundingClientRect().top <= 80) : (hero ? (y > hero.offsetHeight - 84) : (y > 40));
+        hdr.setAttribute('data-solid', solid ? 'true' : 'false');
+      }
       if (prog) {
         var max = document.body.scrollHeight - innerHeight;
         prog.style.transform = 'scaleX(' + (max > 0 ? clamp(y / max, 0, 1) : 0) + ')';

@@ -142,6 +142,16 @@ h3{font:500 var(--fs-h3)/1.3 var(--ff-display);letter-spacing:-.008em}
 .hdr__logo svg{height:32px;width:auto;transition:height .4s var(--e2)}
 .hdr[data-solid="true"] .hdr__logo svg{height:27px}
 
+/* Header transparente sobre o hero (só onde há .hero; solidifica ao passar o hero) */
+.hdr__logo,.nav__a{transition:color .4s var(--e2)}
+.hdr[data-hero="true"]:not([data-solid="true"]){background:transparent;border-bottom-color:transparent;box-shadow:none}
+.hdr[data-hero="true"]:not([data-solid="true"]) .hdr__logo{color:#fff}
+.hdr[data-hero="true"]:not([data-solid="true"]) .nav__a{color:#fff}
+.hdr[data-hero="true"]:not([data-solid="true"]) .nav__a::after{background:#fff}
+.hdr[data-hero="true"]:not([data-solid="true"]) .hdr__burger span{background:#fff}
+.hdr[data-hero="true"]:not([data-solid="true"]) .hdr__cta .btn{background:var(--paper);color:var(--navy-deep)}
+.hdr[data-hero="true"]:not([data-solid="true"]) .hdr__cta .btn:hover{background:#fff}
+
 .nav{display:flex;align-items:center;gap:30px}
 .nav__a{
   display:flex;align-items:baseline;gap:7px;
@@ -195,18 +205,23 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .hdr[data-fit="drawer"] .nav__cta .btn{width:100%;justify-content:center}
 
 /* ---------- 6. Hero (prancha técnica) ----------------------------------- */
-.hero{position:relative;background:var(--navy-deep);overflow:hidden;
-  min-height:clamp(540px,84vh,860px);display:flex;align-items:stretch}
+.hero{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;background:var(--navy-deep);overflow:hidden;
+  display:flex;align-items:stretch}
+/* segunda dobra sobe por cima do hero fixo (efeito de scroll) */
+.afterhero{position:relative;z-index:1;background:var(--paper);margin-top:100vh}
+@supports (height:100dvh){.hero{height:100dvh}.afterhero{margin-top:100dvh}}
 .hero__bg{position:absolute;inset:0;overflow:hidden}
-.hero__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 58%;
+.hero__bg img,.hero__vid{width:100%;height:100%;object-fit:cover;object-position:50% 58%;
   will-change:transform}
+.hero__vid{position:absolute;inset:0}
+@media (prefers-reduced-motion:reduce){.hero__vid{display:none}}
 /* véu: mais denso à esquerda (onde fica o texto) e no topo */
 .hero__veil{position:absolute;inset:0;
   background:
     linear-gradient(100deg,rgba(9,24,42,.9) 0%,rgba(9,24,42,.72) 34%,rgba(9,24,42,.3) 66%,rgba(9,24,42,.42) 100%),
     linear-gradient(180deg,rgba(9,24,42,.55) 0%,rgba(9,24,42,0) 42%)}
 .hero__in{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;
-  justify-content:center;padding:clamp(64px,9vh,104px) 0 clamp(150px,18vh,190px)}
+  justify-content:center;padding-block:calc(var(--header-h) + clamp(36px,5vh,64px)) clamp(150px,18vh,190px)}
 .hero .eyebrow{color:var(--gray);margin-bottom:26px}
 .hero .eyebrow__mk{color:var(--gray)}
 .hero h1{color:#fff;max-width:19ch;font-weight:300}
@@ -315,19 +330,17 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
   background:url("../assets/img/malha.svg") repeat;background-size:132px auto}
 .jor__head,.jor__scene,.jor__foot{position:relative;z-index:1}
 
-.jor__head{padding:var(--sp-sec-md) 0 clamp(18px,2.2vw,28px)}
+.jor__head{padding-block:var(--sp-sec-md) clamp(18px,2.2vw,28px)}
 .jor__scene{position:relative}
-.jor__stick{position:relative}
-.jor__track{display:flex;gap:0;will-change:transform}
-.jor__step{flex:0 0 min(74vw,500px);
-  padding:clamp(22px,2.4vw,32px) clamp(20px,2.2vw,30px);
+.jor__track{display:grid;grid-template-columns:repeat(3,1fr)}
+.jor__step{padding:clamp(22px,2.4vw,32px) clamp(20px,2.2vw,30px);
   border-left:1px solid var(--rule-dark);display:flex;flex-direction:column;
-  min-height:clamp(290px,42vh,430px)}
+  min-height:clamp(240px,30vh,300px)}
 .jor__step:first-child{border-left:0}
 /* o numeral no topo e o texto na base: preenche a altura em vez de deixar
    um bloco flutuando no meio da viewport travada */
 .jor__n{font:300 clamp(2.4rem,4vw,3.4rem)/1 var(--ff-display);letter-spacing:-.03em;
-  color:rgba(241,241,241,.36);font-variant-numeric:tabular-nums;margin-bottom:auto}
+  color:rgba(241,241,241,.36);font-variant-numeric:tabular-nums;margin-bottom:18px}
 .jor__k{margin-top:14px;font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.14em;
   text-transform:uppercase;color:var(--gray)}
 .jor__t{margin-top:8px;font:300 clamp(1.32rem,2vw,1.78rem)/1.14 var(--ff-display);
@@ -337,7 +350,7 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
   position:relative}
 .jor__rule i{position:absolute;inset:0;background:var(--gray);transform:scaleX(0);
   transform-origin:left}
-.jor__foot{padding:clamp(20px,2.4vw,30px) 0 var(--sp-sec-md)}
+.jor__foot{padding-block:clamp(20px,2.4vw,30px) var(--sp-sec-md)}
 
 /* ---------- 12. Portfólio ----------------------------------------------- */
 .pf{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.2vw,30px);
@@ -369,6 +382,27 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .pf__m{margin-top:7px;display:flex;flex-wrap:wrap;gap:4px 14px;
   font:400 .8125rem/1.4 var(--ff-mono);color:var(--muted)}
 .pf__c:hover .pf__t{color:var(--navy)}
+
+/* ---------- Obras — portfólio fullscreen com parallax (ref. dsgninterior.se) ---- */
+.pfx{margin-top:clamp(36px,4vw,60px)}
+.pfx__item{position:relative;display:block;width:100%;height:100vh;min-height:520px;
+  overflow:hidden;background:var(--navy-ink);color:#fff;text-align:center;padding:0}
+.pfx__media{position:absolute;inset:0;overflow:hidden;transition:transform .9s var(--e)}
+.pfx__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  will-change:transform}
+.pfx__item:hover .pfx__media,.pfx__item:focus-visible .pfx__media{transform:scale(1.05)}
+.pfx__veil{position:absolute;inset:0;pointer-events:none;background:rgba(9,20,34,.34)}
+.pfx__cap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:calc(var(--header-h) + 12px) clamp(24px,5vw,64px) clamp(24px,5vw,64px)}
+.pfx__t{font:300 clamp(2.6rem,7.4vw,6.2rem)/1.0 var(--ff-display);
+  letter-spacing:-.03em;color:#fff;text-shadow:0 2px 40px rgba(9,20,34,.5);
+  max-width:16ch;will-change:transform}
+.pfx__view{display:inline-flex;align-items:center;gap:9px;margin-top:clamp(16px,2.4vh,26px);
+  font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(241,241,241,.8);transition:color .35s var(--e),gap .35s var(--e)}
+.pfx__view-i{width:16px;height:16px;opacity:.9;flex:none}
+.pfx__item:hover .pfx__view,.pfx__item:focus-visible .pfx__view{color:#fff;gap:13px}
+@supports (height:100svh){.pfx__item{height:100svh}}
 .pf__tag{color:var(--navy);letter-spacing:.06em;text-transform:uppercase;font-size:.6875rem;
   font-weight:500}
 
@@ -396,10 +430,11 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .pil__d{margin-top:5px;font-size:var(--fs-small);color:var(--muted);line-height:1.56}
 
 /* ---------- 15. Marcas (marquee de nomes, não logos de terceiros) ------- */
-.marcas{background:var(--paper-2);padding:clamp(38px,4.4vw,58px) 0;overflow:hidden;
+.marcas{background:var(--paper-2);padding:clamp(76px,8.5vw,124px) 0;overflow:hidden;
   border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.marcas__h{text-align:center;margin-bottom:26px}
+.marcas__h{text-align:center;margin-bottom:clamp(32px,3.6vw,46px)}
 .marcas__h .eyebrow{justify-content:center;margin:0}
+.marcas__t{max-width:22ch;margin:0 auto;color:var(--ink)}
 .marcas__btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;
   padding:8px 14px;border-radius:2px;
   font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;
@@ -409,11 +444,13 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .mq{display:flex;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 /* pausa de verdade (WCAG 2.2.2): o hover não serve para quem usa teclado */
 .marcas[data-mq="paused"] .mq__t{animation-play-state:paused}
-.mq__t{display:flex;flex:none;gap:0;animation:mq 44s linear infinite}
+.mq__t{display:flex;flex:none;gap:0;align-items:center;animation:mq 44s linear infinite}
 .marcas:hover .mq__t{animation-play-state:paused}
-.mq__i{padding:0 clamp(22px,2.6vw,38px);font:300 clamp(1.1rem,1.8vw,1.6rem)/1 var(--ff-display);
+.mq__i{padding:0 clamp(30px,3.6vw,56px);font:300 clamp(1.1rem,1.8vw,1.6rem)/1 var(--ff-display);
   letter-spacing:-.012em;color:var(--navy);white-space:nowrap;display:flex;align-items:center;gap:clamp(22px,2.6vw,38px)}
 .mq__i svg{width:10px;height:8.6px;color:var(--gray);flex:none}
+.mq__i img{height:clamp(32px,4.2vw,50px);width:auto;display:block;opacity:.62;transition:opacity .3s var(--e2)}
+.marcas:hover .mq__i img{opacity:.88}
 @keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
 /* ---------- 13b. Escopo de execução (lista compacta no split) ----------- */
@@ -502,6 +539,18 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
   max-width:46ch}
 .cta__act{margin-top:clamp(30px,3.4vw,42px)}
 .canais{margin-top:clamp(30px,3.4vw,40px);border-top:1px solid var(--rule-dark)}
+
+/* Contato centralizado (canais removidos): cabeçalho centrado + passos em linha */
+.cta__grid{display:block;max-width:940px;margin:0 auto;text-align:center}
+.cta .eyebrow{justify-content:center}
+.cta__grid h2{max-width:none;margin-inline:auto}
+.cta__act{text-align:center}
+.pass{padding-left:0;margin-top:clamp(46px,6vw,72px);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,46px)}
+.pass__line{display:none}
+.pass__i{padding:0;text-align:center;display:flex;flex-direction:column;align-items:center}
+.pass__dot{position:static;margin:0 0 14px}
+.pass__d{max-width:32ch;margin-inline:auto}
 .canal{display:grid;grid-template-columns:auto 1fr;gap:4px 20px;padding:17px 0;
   border-bottom:1px solid var(--rule-dark)}
 .canal__k{font:500 var(--fs-meta)/1.5 var(--ff-mono);letter-spacing:.12em;text-transform:uppercase;
@@ -513,7 +562,7 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
   overflow-wrap:anywhere}
 
 /* ---------- 17. Footer -------------------------------------------------- */
-.ft{background:#0b2138;color:var(--on-dark-mut);padding:clamp(52px,6vw,76px) 0 30px}
+.ft{position:relative;z-index:1;background:#0b2138;color:var(--on-dark-mut);padding:clamp(52px,6vw,76px) 0 30px}
 .ft__top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(30px,4vw,60px)}
 .ft__logo{color:var(--paper);display:block;margin-bottom:20px}
 .ft__logo svg{height:38px;width:auto}
@@ -576,6 +625,52 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .ck__act{display:flex;gap:10px;flex-wrap:wrap}
 .ck .btn{padding:12px 20px}
 
+/* ---------- 20b. Em cena — reels cinematográficos (click-to-play) ------- */
+/* .reels é full-bleed: fica FORA do .container, ocupa a largura toda, sem gap. */
+.reel-sec{overflow:hidden;padding-block:clamp(52px,6.5vw,92px)}
+.reels{margin-top:clamp(24px,3vw,40px);display:grid;grid-template-columns:repeat(2,1fr);
+  gap:clamp(14px,1.6vw,22px)}
+.reel{position:relative;display:block;width:100%;aspect-ratio:16/9;overflow:hidden;
+  border:0;padding:0;cursor:pointer;background:var(--navy-ink);color:#fff;isolation:isolate;
+  transition:transform .5s var(--e)}
+.reel__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.02);transition:transform .9s var(--e);z-index:-2}
+.reel__scrim{position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(9,20,34,.14) 0%,rgba(9,20,34,.04) 42%,rgba(9,20,34,.72) 100%);
+  transition:background .5s var(--e2)}
+.reel__play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:clamp(72px,7vw,94px);height:clamp(72px,7vw,94px);display:grid;place-items:center;border-radius:50%;
+  background:rgba(9,24,42,.42);backdrop-filter:blur(3px);color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(241,241,241,.55);
+  transition:transform .45s var(--e),background .45s var(--e)}
+.reel__play svg{width:clamp(20px,2vw,26px);height:auto;margin-left:4px}
+.reel__cap{position:absolute;left:0;right:0;bottom:0;z-index:1;display:block;text-align:left;
+  padding:clamp(24px,3vw,44px) clamp(24px,3vw,44px) clamp(16px,1.8vw,26px)}
+.reel__t{display:block;font:300 clamp(1.9rem,3.6vw,3.3rem)/1.04 var(--ff-display);
+  letter-spacing:-.025em;color:#fff;text-shadow:0 1px 18px rgba(9,20,34,.5)}
+.reel:hover .reel__img,.reel:focus-visible .reel__img{transform:scale(1.07)}
+.reel:hover .reel__scrim,.reel:focus-visible .reel__scrim{
+  background:linear-gradient(180deg,rgba(9,20,34,.06) 0%,rgba(9,20,34,0) 42%,rgba(9,20,34,.64) 100%)}
+.reel:hover .reel__play,.reel:focus-visible .reel__play{transform:translate(-50%,-50%) scale(1.1);
+  background:var(--navy)}
+
+/* Player modal */
+.vlb{position:fixed;inset:0;z-index:400;background:#0a1420;
+  grid-template-rows:auto minmax(0,1fr)}
+.vlb:not([hidden]){display:grid}
+.vlb__bar{display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:clamp(14px,2vw,22px) clamp(16px,3vw,34px)}
+.vlb__ttl{min-width:0}
+.vlb__seg{display:block;font:500 var(--fs-meta)/1.6 var(--ff-mono);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gray)}
+.vlb__name{display:block;font:500 var(--fs-small)/1.3 var(--ff-display);color:#fff}
+.vlb__x{width:44px;height:44px;display:grid;place-items:center;color:#fff;flex:none;
+  background:none;border:0;cursor:pointer}
+.vlb__x svg{width:18px;height:18px}
+.vlb__stage{min-height:0;display:grid;place-items:center;padding:0 clamp(8px,2vw,26px) clamp(16px,3vw,30px)}
+.vlb__v{width:auto;height:auto;max-width:min(94vw,1400px);max-height:100%;aspect-ratio:16/9;
+  background:#000;border-radius:3px}
+
 /* ==========================================================================
    21. Responsivo — mobile-first nos ajustes; zero overflow de 320px a desktop.
 
@@ -631,15 +726,17 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 
   /* sem pin no mobile a trilha volta ao fluxo: empilha em vez de rolar na
      horizontal (flex-basis de 78vw x3 estouraria a viewport) */
-  .jor__track{flex-direction:column}
-  .jor__step{flex:1 1 auto;width:100%;padding-left:0;padding-right:0;border-left:0}
+  .jor__track{grid-template-columns:1fr}
+  .jor__step{width:100%;padding-left:0;padding-right:0;border-left:0;min-height:0}
   .jor__step+.jor__step{border-top:1px solid var(--rule-dark)}
   .jor__head{padding-bottom:clamp(18px,3vw,28px)}
 
   .pf{grid-template-columns:repeat(2,1fr)}
+  .reels{grid-template-columns:1fr}
   .sobre{grid-template-columns:1fr;gap:clamp(28px,5vw,40px)}
   .sobre__fig{order:-1}
   .cta__grid{grid-template-columns:1fr}
+  .pass{grid-template-columns:1fr}
   .ft__top{grid-template-columns:1fr 1fr}
   .ft__top>:first-child{grid-column:1/-1}
   .gp__r{grid-template-columns:1fr auto}
