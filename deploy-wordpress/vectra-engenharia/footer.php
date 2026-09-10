@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
   <div class="container">
     <div class="ft__top">
       <div>
-        <span class="ft__logo"><svg viewBox="0 0 546.2352 118.695987" role="img" aria-label="Vectra Engenharia e Construções"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-logo' ); ?>"/></svg></span>
+        <span class="ft__logo"><svg viewBox="0 0 546.2352 118.695987" role="img" aria-label="Vectra Engenharia e Construções"><use href="#i-logo"/></svg></span>
         <p class="ft__p">Projetos de instalações em BIM e obra turn key. Desde 1997, de Curitiba
           para todo o Brasil.</p>
       </div>
@@ -58,6 +58,19 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
     </button>
   </div>
   <p class="lb__foot"><span data-lb-count></span></p>
+</div>
+
+<!-- Player de vídeo (modal cinematográfico) -->
+<div class="vlb" data-vlb role="dialog" aria-modal="true" aria-label="Vídeo da obra" hidden>
+  <div class="vlb__bar">
+    <p class="vlb__ttl"><span class="vlb__seg" data-vlb-sub></span><span class="vlb__name" data-vlb-title></span></p>
+    <button class="vlb__x" type="button" aria-label="Fechar vídeo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </div>
+  <div class="vlb__stage">
+    <video class="vlb__v" data-vlb-video controls playsinline preload="none" width="1920" height="1080"></video>
+  </div>
 </div>
 
 <!-- Consentimento LGPD -->

@@ -63,15 +63,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 <header class="hdr">
   <div class="container hdr__in">
     <a class="hdr__logo" href="#" aria-label="Vectra Engenharia e Construções, ir para o início">
-      <svg viewBox="0 0 546.2352 118.695987" role="img" aria-label="Vectra Engenharia e Construções"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-logo' ); ?>"/></svg>
+      <svg viewBox="0 0 546.2352 118.695987" role="img" aria-label="Vectra Engenharia e Construções"><use href="#i-logo"/></svg>
     </a>
     <nav class="nav" id="menu" aria-label="Navegação principal">
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#atuacao' ); ?>"><span class="nav__n">01</span>Atuação</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#disciplinas' ); ?>"><span class="nav__n">02</span>Disciplinas</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>"><span class="nav__n">03</span>Jornada</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>"><span class="nav__n">04</span>Obras</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>"><span class="nav__n">05</span>Vectra</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>"><span class="nav__n">06</span>Contato</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#atuacao' ); ?>">Atuação</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#disciplinas' ); ?>">Disciplinas</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Jornada</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Obras</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>">Vectra</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Contato</a>
       <div class="nav__cta"><a class="btn" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a></div>
     </nav>
     <div class="hdr__cta"><a class="btn" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a></div>
