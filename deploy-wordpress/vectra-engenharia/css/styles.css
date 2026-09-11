@@ -861,3 +861,6 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
 .doc__b a{color:var(--navy);border-bottom:1px solid var(--rule-strong)}
 .doc__up{font:500 var(--fs-meta)/1 var(--ff-mono);letter-spacing:.13em;text-transform:uppercase;
   color:var(--muted);margin-top:clamp(34px,4vw,48px);padding-top:20px;border-top:1px solid var(--rule)}
+
+/* BuildV: circulo do botao flutuante do Merlin de azul para verde (WhatsApp); balao branco fica intacto */
+.merlin-popup-icon{filter:hue-rotate(-58deg) !important;}
