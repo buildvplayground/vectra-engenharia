@@ -67,7 +67,7 @@ get_header();
 
   <!-- ============ FAIXA: cabine primaria ============ -->
   <section class="band" aria-label="Cabine primária entregue no Jockey Plaza, Curitiba">
-    <div class="band__bg"><img src="<?php echo esc_url( VECTRA_URI . '/assets/img/band-bim.webp' ); ?>" alt="Cabine primária com quadros de média tensão instalada no Jockey Plaza, em Curitiba" loading="lazy" decoding="async" width="2000" height="1333" data-para="0.11"></div>
+    <div class="band__bg"><img src="<?php echo esc_url( VECTRA_URI . '/assets/img/faixa-tecnica.webp' ); ?>" alt="Cabine primária com quadros de média tensão entregue pela Vectra: a infraestrutura elétrica que sustenta a operação" loading="lazy" decoding="async" width="2000" height="1333" data-para="0.11"></div>
     <div class="container band__in">
       <p class="band__cap" data-reveal="soft">O que o cliente não vê é o que sustenta a operação dele.</p>
       <p class="band__meta" data-reveal><span>Modelagem BIM</span><span>Compatibilização de projetos</span><span>Instalações integradas</span></p>
@@ -340,6 +340,31 @@ get_header();
       <li>AG7</li>
       <li>Swell</li>
     </ul>
+  </section>
+
+  <!-- ============ DA PRANCHA AO CANTEIRO: ancora obra ao projeto ============ -->
+  <section class="sec" id="obra" aria-labelledby="h-obra">
+    <div class="container">
+      <div class="sobre sobre--inv">
+        <figure class="sobre__fig" data-reveal="fig">
+          <img src="<?php echo esc_url( VECTRA_URI . '/assets/img/faixa-obra.webp' ); ?>" alt="Obra da Vectra em andamento, com as instalações passando sob a laje antes do acabamento" loading="lazy" decoding="async" width="960" height="1280">
+        </figure>
+        <div>
+          <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Da prancha ao canteiro</p>
+          <h2 id="h-obra" data-split>Quem projeta também executa.</h2>
+          <p class="lede lede--gap" data-reveal>O projeto compatibilizado em BIM não para no papel.
+            A mesma engenharia que dimensiona as disciplinas acompanha a execução, como construtora,
+            no Sul e no Sudeste. Com projeto e obra sob um só responsável, o canteiro anda sem repasse
+            entre fornecedores e sem retrabalho, no prazo da inauguração.</p>
+          <div class="esc">
+            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Um único contrato e um único responsável, do projeto à entrega</span></p>
+            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Equipes especializadas em obras rápidas, com gestão de pessoas e processos</span></p>
+            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Dimensionamento correto de largada: menos surpresa, mais previsibilidade de custo</span></p>
+            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Mais de 38 obras executadas em 2025, até 10 em paralelo</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ============ 06 CONTATO ============ -->
