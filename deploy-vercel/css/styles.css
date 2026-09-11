@@ -844,3 +844,6 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
     transition-duration:.001ms!important;scroll-behavior:auto!important}
   .prog{display:none}
 }
+
+/* BuildV: icone do botao flutuante do Merlin em branco (vinha azul claro) */
+.merlin-popup-icon{filter:brightness(0) invert(1) !important;}
