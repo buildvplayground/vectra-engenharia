@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
     <div class="ft__top">
       <div>
         <span class="ft__logo"><svg viewBox="0 0 546.2352 118.695987" role="img" aria-label="Vectra Engenharia e Construções"><use href="#i-logo"/></svg></span>
-        <p class="ft__p">Projetos de instalações em BIM e obra turn key. Desde 1997, de Curitiba
+        <p class="ft__p">Projetos de instalações em BIM. Desde 1997, de Curitiba
           para todo o Brasil.</p>
       </div>
       <div>
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
         <ul class="ft__l">
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#atuacao' ); ?>">Atuação</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#disciplinas' ); ?>">Disciplinas</a></li>
-          <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Jornada</a></li>
-          <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Obras</a></li>
+          <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Segmentos</a></li>
+          <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Projetos</a></li>
           <li><a href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>">A Vectra</a></li>
         </ul>
       </div>
@@ -86,5 +86,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
   </div>
 
 <?php wp_footer(); ?>
+<!-- BuildV: Merlin -->
+<script nonce="674b0441fc6c35a4da4470bf0253f58e" src='https://scripts.gomerlin.com.br/merlin.js'></script>
+<script>
+  Merlin.Popup.initFromSource("https://tools.gomerlin.com.br/popup/ca1f1b11-eb88-43d1-bd83-7212df0e7126");
+</script>
+<!-- /BuildV: Merlin -->
 </body>
 </html>

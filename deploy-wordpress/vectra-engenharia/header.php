@@ -9,6 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+<!-- BuildV: GTM -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W85BJ9HC');</script>
+<!-- /BuildV: GTM -->
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f2b4a">
@@ -22,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  "@context":"https://schema.org",
  "@type":"GeneralContractor",
  "name":"Vectra Engenharia e Construções",
- "description":"Projetos de instalações em BIM e obra turn key para construtoras, redes de varejo e marcas de fitness.",
+ "description":"Projetos de instalações em BIM para incorporadoras e construtoras.",
  "foundingDate":"1997",
  "url":"https://vectraconstrucoes.com/",
  "telephone":"+5541998292317",
@@ -34,6 +41,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 <?php endif; ?>
 </head>
 <body <?php body_class(); ?>>
+<!-- BuildV: GTM (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W85BJ9HC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- /BuildV: GTM (noscript) -->
 <?php wp_body_open(); ?>
 <a class="skip" href="#conteudo"><?php esc_html_e( 'Ir para o conteudo', 'vectra' ); ?></a>
 
@@ -68,8 +79,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
     <nav class="nav" id="menu" aria-label="Navegação principal">
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#atuacao' ); ?>">Atuação</a>
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#disciplinas' ); ?>">Disciplinas</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Jornada</a>
-        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Obras</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#jornada' ); ?>">Segmentos</a>
+        <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Projetos</a>
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>">Vectra</a>
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Contato</a>
       <div class="nav__cta"><a class="btn" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a></div>

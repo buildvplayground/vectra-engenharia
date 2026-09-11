@@ -25,12 +25,11 @@ get_header();
     <div class="container hero__in">
       <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Curitiba/PR . Desde 1997</p>
       <h1 id="h-hero" data-split>Resolvemos no projeto o que viraria retrabalho na obra.</h1>
-      <p class="hero__sub" data-reveal>Engenharia de instalações em BIM e obra turn key para construtoras,
-        redes de varejo e marcas de fitness em expansão. Um responsável do primeiro estudo
-        à entrega das chaves.</p>
+      <p class="hero__sub" data-reveal>Engenharia de instalações em BIM para incorporadoras e
+        construtora. Um responsável do primeiro estudo preliminar à finalização da obra.</p>
       <div class="hero__act" data-reveal>
         <a class="btn btn--light" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a>
-        <a class="btn btn--ghost-dark" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Ver obras entregues</a>
+        <a class="btn btn--ghost-dark" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Ver projetos</a>
       </div>
     </div>
 
@@ -42,24 +41,25 @@ get_header();
   <section class="sec" id="atuacao" aria-labelledby="h-atuacao">
     <div class="container">
       <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>01 . Atuação</p>
-      <h2 id="h-atuacao" data-split>Duas frentes, um único responsável.</h2>
-      <p class="lede lede--gap" data-reveal>Na expansão, projeto e obra em fornecedores
+      <h2 id="h-atuacao" data-split>Um só projeto, todas as disciplinas.</h2>
+      <p class="lede lede--gap" data-reveal>Na expansão, disciplinas espalhadas por fornecedores
         desconexos geram retrabalho e atraso. Uma inauguração fora da data custa faturamento
-        e imagem de marca. A Vectra assume a jornada inteira.</p>
+        e imagem de marca. A Vectra concentra tudo em um único projeto, compatibilizado em BIM.</p>
 
       <div class="frentes">
         <div class="frente" data-reveal data-rv="left">
-          <div class="frente__t"><span class="frente__l">Frente A</span><h3>Projetos de instalações</h3></div>
+          <div class="frente__t"><span class="frente__l">Projeto</span><h3>Projetos de instalações</h3></div>
           <p>Engenharia multidisciplinar integrada. A Vectra usa a metodologia BIM desde 2015:
             compatibilizamos todas as disciplinas ainda no projeto, em Revit, e entregamos
             documentação pronta para construção.</p>
           <p class="frente__meta"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Projetos em todo o Brasil, do Amazonas ao Rio Grande do Sul</p>
         </div>
         <div class="frente" data-reveal data-rv="right">
-          <div class="frente__t"><span class="frente__l">Frente B</span><h3>Obra turn key</h3></div>
-          <p>Unidade executada e entregue pronta para operar. Um único contrato e um único
-            responsável até a conclusão, sem repasse entre fornecedores.</p>
-          <p class="frente__meta"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Atuação como construtora no Sul do país e em São Paulo</p>
+          <div class="frente__t"><span class="frente__l">BIM</span><h3>Compatibilização em BIM</h3></div>
+          <p>Todas as disciplinas compatibilizadas em Revit antes da obra, com quantitativos
+            vinculados ao modelo. Documentação pronta para construção, com menos erro e
+            desperdício de material.</p>
+          <p class="frente__meta"><svg class="" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Metodologia BIM desde 2015</p>
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ get_header();
     <div class="band__bg"><img src="<?php echo esc_url( VECTRA_URI . '/assets/img/band-bim.webp' ); ?>" alt="Cabine primária com quadros de média tensão instalada no Jockey Plaza, em Curitiba" loading="lazy" decoding="async" width="2000" height="1333" data-para="0.11"></div>
     <div class="container band__in">
       <p class="band__cap" data-reveal="soft">O que o cliente não vê é o que sustenta a operação dele.</p>
-      <p class="band__meta" data-reveal><span>Modelagem BIM</span><span>Compatibilização de projetos</span><span>Estrutura e instalações integradas</span></p>
+      <p class="band__meta" data-reveal><span>Modelagem BIM</span><span>Compatibilização de projetos</span><span>Instalações integradas</span></p>
     </div>
   </section>
 
@@ -86,7 +86,7 @@ get_header();
       <div class="disc">
           <div class="disc__i" data-reveal>
             <span class="disc__n">01</span>
-            <div><h3 class="disc__t">Instalações elétricas</h3><p class="disc__d">Projetos executivos e laudos técnicos.</p></div>
+            <div><h3 class="disc__t">Instalações elétricas</h3><p class="disc__d">Projetos executivos e luminotécnico.</p></div>
           </div>
           <div class="disc__i" data-reveal>
             <span class="disc__n">02</span>
@@ -116,9 +116,8 @@ get_header();
             <span class="disc__n">08</span>
             <div><h3 class="disc__t">Pressurização de escadas</h3><p class="disc__d">Escadas de emergência conforme norma.</p></div>
           </div>
-        <p class="disc__foot" data-reveal>Complementares: projeto luminotécnico e projeto estrutural.
-          Modelagem em BIM desde o começo, com extração automatizada de quantitativos vinculada
-          ao modelo, que reduz margem de erro e evita desperdício de material.</p>
+        <p class="disc__foot" data-reveal>Modelagem em BIM desde o começo, com extração automatizada
+          de quantitativos vinculada ao modelo, que reduz margem de erro e evita desperdício de material.</p>
       </div>
     </div>
   </section>
@@ -132,76 +131,46 @@ get_header();
       <span class="jor__mesh"></span>
     </div>
     <div class="container jor__head">
-      <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>03 . Jornada</p>
-      <h2 id="h-jor" data-split>Uma única jornada, um único responsável.</h2>
+      <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>03 . Segmentos</p>
+      <h2 id="h-jor" data-split>Um projeto para cada segmento.</h2>
     </div>
     <div class="jor__scene">
       <div class="container">
         <div class="jor__track">
           <article class="jor__step">
             <span class="jor__n">01</span>
-            <p class="jor__k">Etapa 01 . O início</p>
-            <h3 class="jor__t">Projeto de instalações</h3>
-            <p class="jor__p">Elétrico, estrutural, hidrossanitário, climatização e exaustão, SPDA, telecom, gás, drenagem e pressurização de escadas. Compatibilização entre todas as disciplinas ainda no projeto, em Revit e BIM, que elimina conflito e retrabalho na obra.</p>
+            <p class="jor__k">Segmento 01 . Residencial</p>
+            <h3 class="jor__t">Edifícios residenciais</h3>
+            <p class="jor__p">Instalações completas para incorporadoras: elétrica, hidrossanitário, climatização, incêndio, SPDA, gás e telecom compatibilizados em BIM antes da obra, no prazo do lançamento.</p>
           </article>
           <article class="jor__step">
             <span class="jor__n">02</span>
-            <p class="jor__k">Etapa 02 . A gestão</p>
-            <h3 class="jor__t">Planejamento e compatibilização</h3>
-            <p class="jor__p">Cronograma ancorado na data do cliente, com planejamento semanal e acompanhamento diário. Coordenação técnica com rastreabilidade: o cliente sempre sabe em que fase a obra está e quais são os próximos passos.</p>
+            <p class="jor__k">Segmento 02 . Varejo</p>
+            <h3 class="jor__t">Marcas de varejo</h3>
+            <p class="jor__p">Projetos para redes em expansão, no padrão da marca e no prazo da inauguração. Disciplinas replicáveis loja a loja, com documentação pronta para aprovação e execução.</p>
           </article>
           <article class="jor__step">
             <span class="jor__n">03</span>
-            <p class="jor__k">Etapa 03 . A entrega</p>
-            <h3 class="jor__t">Obra turn key</h3>
-            <p class="jor__p">Obra executada e entregue pronta para operar. Um único contrato e um único responsável até a conclusão, sem repasse entre fornecedores. Qualidade dos materiais às soluções construtivas.</p>
+            <p class="jor__k">Segmento 03 . Grande porte</p>
+            <h3 class="jor__t">Galpões e indústrias</h3>
+            <p class="jor__p">Engenharia de instalações para grandes áreas — galpões logísticos e plantas industriais — com quantitativos vinculados ao modelo e extração automatizada.</p>
           </article>
         </div>
       </div>
     </div>
     <div class="container jor__foot">
-      <p class="lede" data-reveal>Metodologia BIM, gestão contínua e alto padrão de acabamento:
-        qualidade técnica integrada e controle operacional em escala.</p>
-    </div>
-  </section>
-
-  <!-- ============ ESCOPO DE OBRA (split: foto + lista) ============ -->
-  <section class="sec" id="escopo" aria-labelledby="h-escopo">
-    <div class="container">
-      <div class="sobre sobre--inv">
-        <figure class="sobre__fig" data-reveal="fig">
-          <img src="<?php echo esc_url( VECTRA_URI . '/assets/img/escopo-pinhais.webp' ); ?>" alt="Interior em obra da unidade Smart Fit de Mogi das Cruzes, com estrutura e instalações aparentes" loading="lazy" decoding="async" width="2000" height="1500">
-        </figure>
-        <div>
-          <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Escopo de execução</p>
-          <h2 id="h-escopo" data-split>Construção civil, solução completa para a sua obra.</h2>
-          <p class="lede lede--gap" data-reveal>No canteiro, a Vectra assume da fundação ao
-            acabamento fino. Um único contrato cobre a obra e todos os sistemas que a fazem
-            operar no dia da inauguração.</p>
-          <div class="esc">
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Construção civil da fundação ao acabamento fino</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Instalações elétricas e automação</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Subestação e entrada de energia</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Prevenção e combate a incêndio</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Sistema de ar-condicionado</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Sistema de renovação de ar</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Sistema de exaustão</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Reformas e adequações</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Comunicação visual interna e externa</span></p>
-            <p class="esc__i" data-reveal><svg class="esc__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg><span>Mobiliário</span></p>
-          </div>
-        </div>
-      </div>
+      <p class="lede" data-reveal>Metodologia BIM desde 2015: cada disciplina compatibilizada
+        no projeto, pronta para a obra, em qualquer segmento.</p>
     </div>
   </section>
 
   <!-- ============ 04 OBRAS: portfolio ============ -->
   <section class="sec" id="obras" aria-labelledby="h-obras">
     <div class="container">
-      <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>04 . Obras</p>
-      <h2 id="h-obras" data-split>Obras entregues e em andamento.</h2>
-      <p class="lede lede--gap" data-reveal>Fotografia real das unidades onde nossos
-        projetos e nossa execução saíram do papel. Clique em uma obra para ver a galeria completa.</p>
+      <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>04 . Projetos</p>
+      <h2 id="h-obras" data-split>Projetos que saíram do papel.</h2>
+      <p class="lede lede--gap" data-reveal>Fotografia real das unidades onde nossos projetos
+        ganharam obra. Clique em um projeto para ver a galeria completa.</p>
 
             <div class="pfx">
         <button class="pfx__item" type="button"
@@ -274,42 +243,6 @@ get_header();
     </div>
   </section>
 
-  <!-- ============ EM CENA: reels cinematograficos (click-to-play) ============ -->
-  <section class="reel-sec sec--dark" id="videos" aria-labelledby="h-videos">
-    <div class="container">
-      <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>Em cena</p>
-      <h2 id="h-videos" data-split>As obras em movimento.</h2>
-      <p class="lede lede--gap" data-reveal>Da estrutura ao acabamento, o que entregamos ganha vida.
-        Escolha uma obra e assista ao vídeo completo.</p>
-    </div>
-    <div class="container reels">
-      <button class="reel" type="button"
-              data-video="<?php echo esc_url( VECTRA_URI . '/assets/video/bioritmo-full.mp4' ); ?>"
-              data-title="Bioritmo Carlos Gomes"
-              data-sub="Academia · Curitiba/PR"
-              aria-label="Assistir ao vídeo da obra Bioritmo Carlos Gomes">
-        <img class="reel__img" src="<?php echo esc_url( VECTRA_URI . '/assets/img/poster-bioritmo.webp' ); ?>" alt="Fachada iluminada da academia Bioritmo Carlos Gomes, em Curitiba, entregue pela Vectra" loading="lazy" decoding="async" width="1920" height="1080">
-        <span class="reel__scrim" aria-hidden="true"></span>
-        <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
-        <span class="reel__cap">
-          <span class="reel__t">Bioritmo Carlos Gomes</span>
-        </span>
-      </button>
-      <button class="reel" type="button"
-              data-video="<?php echo esc_url( VECTRA_URI . '/assets/video/arena-brahma-full.mp4' ); ?>"
-              data-title="Arena Brahma"
-              data-sub="Bar e restaurante · Curitiba/PR"
-              aria-label="Assistir ao vídeo da obra Arena Brahma">
-        <img class="reel__img" src="<?php echo esc_url( VECTRA_URI . '/assets/img/poster-arena-brahma.webp' ); ?>" alt="Salão do Arena Brahma, em Curitiba, com as arquibancadas do estádio ao fundo, entregue pela Vectra" loading="lazy" decoding="async" width="1920" height="1080">
-        <span class="reel__scrim" aria-hidden="true"></span>
-        <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 18 20"><path d="M1 1l16 9-16 9z" fill="currentColor"/></svg></span>
-        <span class="reel__cap">
-          <span class="reel__t">Arena Brahma</span>
-        </span>
-      </button>
-    </div>
-  </section>
-
   <!-- ============ GRANDE PORTE: lista tipografica ============ -->
   <section class="sec sec--md sec--paper2" aria-labelledby="h-gp">
     <div class="container">
@@ -335,7 +268,7 @@ get_header();
             <span class="gp__n">Qoya</span><span class="gp__i">Piemonte</span><span class="gp__a">18.186 m²</span>
           </div>
           <div class="gp__r" data-reveal>
-            <span class="gp__n">Core Palácio</span><span class="gp__i">Thá Engenharia</span><span class="gp__a">17.870 m²</span>
+            <span class="gp__n">Core Palácio</span><span class="gp__i">Gadens Incorporadora</span><span class="gp__a">17.870 m²</span>
           </div>
           <div class="gp__r" data-reveal>
             <span class="gp__n">Yacht Tower</span><span class="gp__i">Bicalho</span><span class="gp__a">17.752 m²</span>
@@ -355,9 +288,9 @@ get_header();
           <h2 id="h-vectra" data-split>Três décadas resolvendo desafios complexos de engenharia.</h2>
           <p class="lede lede--gap" data-reveal>Referência em engenharia de alta
             performance, a Vectra entrega soluções que integram eficiência e precisão técnica.
-            Nosso corpo técnico de engenheiros e arquitetos garante que cada detalhe do projeto
-            seja executado no padrão que a marca do cliente exige. Do projeto à entrega das
-            chaves, sem aventura e sem improviso. Temos o propósito de ser agentes de evolução
+            Nosso corpo técnico de engenheiros garante que cada detalhe do projeto
+            seja executado no padrão que a marca do cliente exige. Do projeto à finalização
+            da obra, sem aventura e sem improviso. Temos o propósito de ser agentes de evolução
             nas cidades onde atuamos.</p>
           <div class="pil">
             <div class="pil__i" data-reveal>
@@ -417,7 +350,7 @@ get_header();
           <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>06 . Contato</p>
           <h2 id="h-contato" data-split>Como solicitar seu orçamento.</h2>
           <div class="cta__act" data-reveal>
-            <a class="btn btn--light" data-wa-btn="projetos de instalações ou obra turn key" href="#">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a>
+            <a class="btn btn--light" data-wa-btn="projetos de instalações" href="#">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a>
           </div>
         </div>
 
