@@ -83,9 +83,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Projetos</a>
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#vectra' ); ?>">Vectra</a>
         <a class="nav__a" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Contato</a>
-      <div class="nav__cta"><a class="btn" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a></div>
+      <div class="nav__cta"><button class="btn" type="button" data-cta>Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></button></div>
     </nav>
-    <div class="hdr__cta"><a class="btn" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a></div>
+    <div class="hdr__cta"><button class="btn" type="button" data-cta>Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></button></div>
     <button class="hdr__burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span><span></span>
     </button>
