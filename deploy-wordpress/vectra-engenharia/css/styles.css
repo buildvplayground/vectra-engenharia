@@ -182,6 +182,12 @@ h3{font:500 var(--fs-h3)/1.3 var(--ff-display);letter-spacing:-.008em}
 body.nav-open .hdr__burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
 body.nav-open .hdr__burger span:nth-child(2){opacity:0}
 body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+/* menu mobile aberto: força cores escuras (o header transparente pinta tudo de branco) */
+body.nav-open .hdr__logo{color:var(--navy)!important}
+body.nav-open .nav__a{color:var(--ink)!important}
+body.nav-open .hdr__burger span{background:var(--ink)!important}
+/* logo e X acima do drawer fullscreen (senao o menu cobre o proprio X) */
+.hdr__logo,.hdr__burger{position:relative;z-index:101}
 
 /* Trava por medição: o JS marca data-fit="tight" quando a linha do header não
    cabe no container, independentemente de breakpoint. Já pegou dois bugs aqui
@@ -189,10 +195,10 @@ body.nav-open .hdr__burger span:nth-child(3){transform:translateY(-7.5px) rotate
 .hdr[data-fit="tight"] .hdr__cta{display:none}
 .hdr[data-fit="drawer"] .hdr__burger{display:flex}
 .hdr[data-fit="drawer"] .nav{
-  position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);
+  position:fixed;top:0;right:0;bottom:0;width:100%;
   flex-direction:column;align-items:flex-start;justify-content:flex-start;
   gap:0;padding:calc(var(--header-h) + 26px) 26px 30px;
-  background:var(--paper);border-left:1px solid var(--rule);
+  background:var(--paper);
   transform:translateX(101%);transition:transform .46s var(--e);
   overflow-y:auto;z-index:99}
 body.nav-open .hdr[data-fit="drawer"] .nav,
@@ -695,10 +701,10 @@ body.nav-open .hdr[data-fit="drawer"] .nav{transform:translateX(0)}
   :root{--header-h:66px}
   .hdr__burger{display:flex}
   .nav{
-    position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);
+    position:fixed;top:0;right:0;bottom:0;width:100%;
     flex-direction:column;align-items:flex-start;justify-content:flex-start;
     gap:0;padding:calc(var(--header-h) + 26px) 26px 30px;
-    background:var(--paper);border-left:1px solid var(--rule);
+    background:var(--paper);
     transform:translateX(101%);transition:transform .46s var(--e);
     overflow-y:auto;z-index:99;
   }
