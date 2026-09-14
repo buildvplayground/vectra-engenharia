@@ -85,6 +85,25 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
     </div>
   </div>
 
+<!-- Widget do CRM BuildV -->
+<script src="https://app-crm.buildv.com.br/widget.js" data-widget="wid_8da1c55a138d59933e9af7e3f2e77c2b" data-api="https://buildv-crm-clients-api-production.up.railway.app" async></script>
+<script>
+  /* CTAs abrem o popup do widget BuildV CRM (o .bv-launcher vive em shadow DOM) */
+  (function(){
+    function findLauncher(){
+      var l=document.querySelector('.bv-launcher'); if(l) return l;
+      var hosts=document.querySelectorAll('*');
+      for(var i=0;i<hosts.length;i++){ if(hosts[i].shadowRoot){ var x=hosts[i].shadowRoot.querySelector('.bv-launcher'); if(x) return x; } }
+      return null;
+    }
+    document.addEventListener('click', function(e){
+      var t=e.target.closest('[data-cta]'); if(!t) return;
+      e.preventDefault();
+      var l=findLauncher(); if(l) l.click();
+    });
+  })();
+</script>
+
 <?php wp_footer(); ?>
 </body>
 </html>

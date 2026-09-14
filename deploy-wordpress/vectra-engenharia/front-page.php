@@ -29,7 +29,7 @@ get_header();
         redes de varejo e marcas de fitness em expansão. Um responsável do primeiro estudo
         à entrega das chaves.</p>
       <div class="hero__act" data-reveal>
-        <a class="btn btn--light" data-wa-btn="" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#contato' ); ?>">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a>
+        <button class="btn btn--light" type="button" data-cta>Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></button>
         <a class="btn btn--ghost-dark" href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#obras' ); ?>">Ver obras entregues</a>
       </div>
     </div>
@@ -417,7 +417,7 @@ get_header();
           <p class="eyebrow"><svg class="eyebrow__mk" viewBox="0 0 291.146 251.695" aria-hidden="true"><use href="<?php echo esc_url( ( is_front_page() ? '' : home_url( '/' ) ) . '#i-v' ); ?>"/></svg>06 . Contato</p>
           <h2 id="h-contato" data-split>Como solicitar seu orçamento.</h2>
           <div class="cta__act" data-reveal>
-            <a class="btn btn--light" data-wa-btn="projetos de instalações ou obra turn key" href="#">Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></a>
+            <button class="btn btn--light" type="button" data-cta>Solicitar orçamento<svg class="btn__ar" viewBox="0 0 15 9" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 4.5h13.4M10 1l3.6 3.5L10 8"/></svg></button>
           </div>
         </div>
 
