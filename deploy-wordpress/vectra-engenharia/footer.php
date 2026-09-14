@@ -85,12 +85,25 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
     </div>
   </div>
 
-<?php wp_footer(); ?>
-<!-- BuildV: Merlin -->
-<script nonce="674b0441fc6c35a4da4470bf0253f58e" src='https://scripts.gomerlin.com.br/merlin.js'></script>
+<!-- Widget do CRM BuildV -->
+<script src="https://app-crm.buildv.com.br/widget.js" data-widget="wid_8da1c55a138d59933e9af7e3f2e77c2b" data-api="https://buildv-crm-clients-api-production.up.railway.app" async></script>
 <script>
-  Merlin.Popup.initFromSource("https://tools.gomerlin.com.br/popup/ca1f1b11-eb88-43d1-bd83-7212df0e7126");
+  /* CTAs abrem o popup do widget BuildV CRM (o .bv-launcher vive em shadow DOM) */
+  (function(){
+    function findLauncher(){
+      var l=document.querySelector('.bv-launcher'); if(l) return l;
+      var hosts=document.querySelectorAll('*');
+      for(var i=0;i<hosts.length;i++){ if(hosts[i].shadowRoot){ var x=hosts[i].shadowRoot.querySelector('.bv-launcher'); if(x) return x; } }
+      return null;
+    }
+    document.addEventListener('click', function(e){
+      var t=e.target.closest('[data-cta]'); if(!t) return;
+      e.preventDefault();
+      var l=findLauncher(); if(l) l.click();
+    });
+  })();
 </script>
-<!-- /BuildV: Merlin -->
+
+<?php wp_footer(); ?>
 </body>
 </html>
